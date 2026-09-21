@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Long A and L-Blends Phonics Game</title>
+<style>
+:root{--bg:#fff8e7;--card:#fff;--ink:#23304a;--mut:#5b6785;--pri:#2f7de1;--acc:#ff8a3d;--ok:#d9f7df;--okb:#2e9d4f;--no:#ffe1e1;--nob:#d94a4a;--bd:#dfe6f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17203a;--card:#222d4d;--ink:#f3f6ff;--mut:#b6c1e0;--ok:#1f4a31;--no:#5a2a2e;--bd:#3a4770}}
+:root[data-theme="dark"]{--bg:#17203a;--card:#222d4d;--ink:#f3f6ff;--mut:#b6c1e0;--ok:#1f4a31;--no:#5a2a2e;--bd:#3a4770}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Comic Sans MS","Chalkboard SE","Trebuchet MS",Verdana,sans-serif;font-size:19px;line-height:1.45}
+header{background:linear-gradient(90deg,#2f7de1,#8a5cf0,#ff8a3d);color:#fff;padding:14px 16px;text-align:center}
+header h1{margin:0;font-size:clamp(20px,5vw,30px)}
+main{max-width:760px;margin:0 auto;padding:14px}
+#hud{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:2}
+.row{display:flex;justify-content:space-between;font-weight:bold;margin-bottom:6px}
+.track{height:14px;background:var(--bd);border-radius:9px;overflow:hidden}
+#bar{height:100%;width:0;background:linear-gradient(90deg,#3ecf6b,#ffc933);transition:width .4s}
+.card{background:var(--card);border:3px solid var(--bd);border-radius:22px;padding:18px;margin:12px 0;animation:pop .35s}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:none;opacity:1}}
+@keyframes bounce{0%,100%{transform:none}40%{transform:translateY(-8px)}}
+h2{font-size:clamp(20px,4.5vw,26px);margin:.3em 0}h3{margin:.2em 0}
+.tag{display:inline-block;background:var(--acc);color:#fff;border-radius:20px;padding:3px 12px;font-size:16px;font-weight:bold}
+.tip{color:var(--mut);margin:.4em 0;font-size:17px}
+.big{font-size:clamp(38px,11vw,68px);font-weight:bold;text-align:center;margin:10px 0;color:var(--pri);letter-spacing:2px}
+.big.sm{font-size:clamp(24px,6vw,34px);letter-spacing:0}
+.bk{display:inline-block;min-width:1.1em;border-bottom:5px solid var(--acc);color:var(--acc)}
+button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.spk,.chip{border:2px solid var(--bd);background:var(--card);color:var(--ink);border-radius:14px}
+.spk{font-size:26px;margin-left:10px;padding:2px 12px;vertical-align:middle}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:10px}
+.opt{min-height:60px;font-size:22px;font-weight:bold;border:3px solid var(--pri);background:var(--card);color:var(--ink);border-radius:16px;padding:10px;transition:transform .15s}
+.opt:hover:not(:disabled){transform:scale(1.04);background:var(--bd)}
+.opt.ok{background:var(--ok);border-color:var(--okb)}.opt.no{background:var(--no);border-color:var(--nob)}
+.opt.ok{animation:bounce .5s}
+.go{display:block;margin:14px auto 0;min-height:56px;padding:10px 28px;font-size:22px;font-weight:bold;color:#fff;background:var(--acc);border:0;border-radius:30px}
+.go.alt{background:var(--pri)}
+.fb{border-radius:16px;padding:12px 14px;margin-top:14px;border:3px solid;animation:pop .3s}
+.fb.g{background:var(--ok);border-color:var(--okb)}.fb.r{background:var(--no);border-color:var(--nob)}
+.t{display:inline-block;margin:6px 4px 0;padding:6px 12px;border-radius:10px;background:var(--card);border:2px solid var(--pri);font-size:24px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.mini{border:2px dashed var(--pri);border-radius:16px;padding:10px}
+.mini b{font-size:26px;color:var(--acc)}
+.chip{margin:3px;padding:6px 12px;font-size:19px}
+.hide{display:none}
+.stars{font-size:44px;text-align:center}
+table{width:100%;border-collapse:collapse}td{padding:4px 6px;border-bottom:1px solid var(--bd)}
+.opt,.go,.spk,.chip{user-select:none;-webkit-user-select:none}\n@media (max-width:480px){body{font-size:18px}main{padding:10px}.card{padding:14px;border-radius:18px}.opts{grid-template-columns:1fr}.opt{min-height:56px}}\n</style></head>
+<body>
+<header><h1>✈️ Long A and L-Blends Game 🐌</h1></header>
+<main>
+<div id="hud" hidden><div class="row"><span id="pn"></span><span>⭐ Score: <span id="sc">0</span></span></div><div class="track"><div id="bar"></div></div></div>
+
+<section id="learn">
+ <div class="card"><h2>📘 Learn It</h2>
+  <h3>Long A says its name: “ay”</h3>
+  <p>There are three ways to spell it. Tap a word to hear it! 🔊</p>
+  <div class="grid" id="lA"></div></div>
+ <div class="card"><h3>🔤 What is a blend?</h3>
+  <p>A blend has <b>two consonant sounds</b> said close together. You can still hear <b>both</b> sounds!</p>
+  <p style="text-align:center"><span class="t">f</span> + <span class="t">l</span> = <span class="t">fl</span> → <b>flag</b></p>
+  <div class="grid" id="lB"></div></div>
+ <div class="card"><p>Ready to play? There are 26 questions. Listen, look and think!</p>
+  <button class="go" onclick="start()">Let’s Play! 🚀</button></div>
+</section>
+
+<section id="quiz" hidden><div class="card" id="card"></div></section>
+
+<section id="end" hidden>
+ <div class="card"><h2 style="text-align:center">🎉 Great Work! 🎉</h2>
+  <div class="stars" id="st"></div>
+  <p class="big" id="fs" style="margin:0"></p>
+  <p id="msg" style="text-align:center"></p>
+  <table id="brk"></table></div>
+ <div class="card"><h2>🧠 What I Learned</h2>
+  <p><b>Long A:</b> <span class="t">a_e</span> cake &nbsp;<span class="t">ai</span> rain &nbsp;<span class="t">ay</span> play</p>
+  <p><b>/l/ blends</b> (two sounds, hear both!):</p>
+  <p><span class="t">bl</span> black &nbsp;<span class="t">cl</span> clap &nbsp;<span class="t">fl</span> flag &nbsp;<span class="t">gl</span> glass &nbsp;<span class="t">pl</span> plane &nbsp;<span class="t">sl</span> slide</p>
+  <button class="go" onclick="start()">Try Again 🔄</button>
+  <button class="go alt" onclick="show('learn')">Read Learn It Again 📘</button></div>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const say=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.8;speechSynthesis.speak(u)}catch(e){}};
+const A={'a_e':['cake game plane gate','a + a letter + silent e'],'ai':['rain train paint snail','ai in the middle'],'ay':['day play stay tray','ay at the end']};
+const B={bl:'black block blue',cl:'clap clock clean',fl:'flag flower fly',gl:'glass glue glad',pl:'plane plate play',sl:'slide sleep slow'};
+const wb=w=>w.split(' ').map(x=>`<button class="chip" data-s="${x}">${x}</button>`).join('');
+$('lA').innerHTML=Object.entries(A).map(([k,v])=>`<div class="mini"><b>${k}</b><br><small>${v[1]}</small><br>${wb(v[0])}</div>`).join('');
+$('lB').innerHTML=Object.entries(B).map(([k,v])=>`<div class="mini"><b>${k}</b><br>${wb(v)}</div>`).join('');
+
+const S=[
+{t:'Hear and Choose',e:'👂',tip:'Listen. Does the word say “ay” like in cake?',fix:1},
+{t:'Long A Sort',e:'🧺',tip:'Which spelling pattern makes the long A?',fix:1},
+{t:'Find the Blend',e:'🔎',tip:'Look at the start of the word.'},
+{t:'Match It',e:'🧩',tip:'Match the picture or clue to the word.'},
+{t:'Complete the Word',e:'✏️',tip:'Use the clue. Tap the missing letters.'},
+{t:'Read the Sentence',e:'📖',tip:'Read the sentence. Tap the sound speaker to hear it.'},
+{t:'Can You Hear Both?',e:'🎧',tip:'Say the word slowly. Hear every sound. A blend is two sounds!'},
+{t:'Challenge Round',e:'🏆',tip:'Long A, an /l/ blend, both, or neither?'}];
+const Q=(s,lv,q,w,o,a,y,x)=>({s,lv,q,w,o,a,y,x});
+const YN=['Yes','No'],P=['a_e','ai','ay'],C=['Only long A','Only an /l/ blend','Both','Neither'];
+const Qs=[
+Q(0,1,'Does this word have the long A sound?','cake',YN,0,'Yes! Cake says “ay”. It uses a_e: c-a-k-e.'),
+Q(0,2,'Does this word have the long A sound?','hat',YN,1,'No. The a in hat is a short sound. It does not say “ay”.'),
+Q(0,3,'Does this word have the long A sound?','glass',YN,1,'No. Glass has the gl blend, but its a is not long A.'),
+Q(1,1,'Which pattern makes the long A?','game',P,0,'Game uses a_e: a, m, and a silent e.'),
+Q(1,2,'Which pattern makes the long A?','paint',P,1,'Paint has ai in the middle.'),
+Q(1,2,'Which pattern makes the long A?','tray',P,2,'Tray has ay at the end.'),
+Q(2,1,'Which /l/ blend starts this word?','black',['bl','cl','fl','gl'],0,'Black starts with /b/ + /l/. You can hear both.'),
+Q(2,2,'Which /l/ blend starts this word?','slide',['sl','pl','gl','fl'],0,'Slide starts with /s/ + /l/.'),
+Q(2,3,'Which /l/ blend starts this word?','plate',['bl','pl','gl','sl'],1,'Plate starts with /p/ + /l/. It also has long A (a_e)!'),
+Q(3,1,'Which word matches the picture?','🐌',['snail','slide','train'],0,'A snail is slow. Snail has the long A pattern ai.'),
+Q(3,2,'Which word matches the picture?','✈️',['plate','plane','play'],1,'A plane flies. Plane starts with pl and has a_e.'),
+Q(3,2,'Which word matches the clue? You drink from it.','🥛',['glue','glad','glass'],2,'You drink from a glass. It starts with /g/ + /l/.'),
+Q(4,1,'Pick the long A pattern. Clue: It falls from clouds.','r__n',P,1,'r + ai + n = rain.',{sp:'rain'}),
+Q(4,2,'Pick the blend. Clue: It flies in the sky.','__ane',['bl','pl','sl'],1,'p + l + a_e + n = plane.',{sp:'plane'}),
+Q(4,2,'Pick the long A pattern. Clue: You carry food on it.','tr__',P,2,'tr + ay = tray.',{sp:'tray'}),
+Q(4,3,'Pick the pattern. Clue: You eat it at a party.','c_k_',P,0,'c-a-k-e uses a_e: cake.',{sp:'cake'}),
+Q(5,2,'Which word has the long A sound?','A snail is slow.',['snail','slow','is'],0,'Snail has ai, so it says “ay”.',{sp:'A snail is slow.'}),
+Q(5,2,'Which word starts with an /l/ blend?','The clock is on the wall.',['wall','clock','on'],1,'Clock starts with /k/ + /l/.',{sp:'The clock is on the wall.'}),
+Q(5,3,'Which word has BOTH long A and an /l/ blend?','Tom will play on the slide.',['Tom','slide','play','will'],2,'Play has pl and ay. Slide has sl, but no long A.',{sp:'Tom will play on the slide.'}),
+Q(6,2,'Which shows ALL the sounds in flag?','flag',['/f/ + /l/ + /a/ + /g/','/fl/ + /a/ + /g/','/f/ + /a/ + /g/'],0,'We hear /f/ and then /l/. Both sounds are there!',{seg:['f','l','a','g']}),
+Q(6,2,'Say clap slowly. What is the second sound?','clap',['/l/','/k/','/p/'],0,'c-l-a-p: /k/ then /l/ then /a/ then /p/.',{seg:['c','l','a','p']}),
+Q(6,3,'How many sounds do you hear in plane?','plane',['3','4','5'],1,'/p/ /l/ /ay/ /n/ = 4 sounds. The e is silent.',{seg:['p','l','ay','n']}),
+Q(7,2,'The word plane has:','plane',C,2,'Plane has pl (a blend) and a_e (long A).',{f:1}),
+Q(7,3,'The word train has:','train',C,0,'Train has ai (long A). The tr blend does not have an l.',{f:1}),
+Q(7,3,'The word slide has:','slide',C,1,'Slide has the sl blend. Its i is not long A.',{f:1}),
+Q(7,3,'Which word has BOTH long A and an /l/ blend?','🔎',['train','glass','flame','slide'],2,'Flame has fl and a_e.')];
+const Qz=Qs,PR=['Great job! 🎉','Super! ⭐','You got it! 👏','Awesome! 🌟'];
+let i,score,sc,cnt,done;
+function show(id){['learn','quiz','end'].forEach(x=>$(x).hidden=x!=id);$('hud').hidden=id!='quiz';scrollTo(0,0)}
+function start(){i=0;score=0;sc=S.map(()=>0);cnt=S.map(()=>0);show('quiz');render()}
+function render(){
+ done=0;const q=Qz[i],s=S[q.s],x=q.x||{};
+ let o=q.o.map((t,k)=>({t,k}));
+ if(!(s.fix||x.f))o.sort(()=>Math.random()-.5);
+ const sp=x.sp||(/^[a-z]{3,}$/i.test(q.w)?q.w:'');
+ $('bar').style.width=i/Qz.length*100+'%';
+ $('pn').textContent='Question '+(i+1)+' of '+Qz.length;$('sc').textContent=score;
+ const c=$('card');c.style.animation='none';c.offsetWidth;c.style.animation='';
+ c.innerHTML=`<span class="tag">${s.e} ${s.t} · ${'⭐'.repeat(q.lv)}</span><p class="tip">${s.tip}</p><h2>${q.q}</h2><div class="big ${q.w.length>12?'sm':''}">${q.w.replace(/_+/g,'<span class="bk">?</span>')}${sp?`<button class="spk" data-s="${sp}" aria-label="Hear it">🔊</button>`:''}</div><div class="opts">${o.map(p=>`<button class="opt" data-k="${p.k}">${p.t}</button>`).join('')}</div><div id="fb" aria-live="polite"></div>`;
+ scrollTo(0,0)}
+function pick(b){
+ done=1;const q=Qz[i],k=+b.dataset.k,ok=k==q.a;cnt[q.s]++;
+ if(ok){score++;sc[q.s]++}
+ document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(+x.dataset.k==q.a)x.classList.add('ok')});
+ if(!ok)b.classList.add('no');
+ $('sc').textContent=score;
+ const seg=q.x&&q.x.seg?'<div>'+q.x.seg.map(g=>`<span class="t">${g}</span>`).join('+')+'</div>':'';
+ $('fb').innerHTML=`<div class="fb ${ok?'g':'r'}"><b>${ok?PR[Math.floor(Math.random()*PR.length)]:'Not quite! The answer is “'+q.o[q.a]+'”.'}</b> ${q.y}${seg}</div><button class="go" onclick="next()">${i==Qz.length-1?'See my score 🎉':'Next ➜'}</button>`;
+ $('fb').scrollIntoView({block:'nearest',behavior:'smooth'})}
+function next(){i++;if(i>=Qz.length)end();else render()}
+function end(){
+ $('bar').style.width='100%';show('end');
+ const p=score/Qz.length;
+ $('st').textContent=p>=.9?'⭐⭐⭐':p>=.6?'⭐⭐':'⭐';
+ $('fs').textContent=score+' / '+Qz.length;
+ $('msg').textContent=p>=.9?'Wow! You are a phonics star!':p>=.6?'Nice work! Keep practising and try again!':'Good try! Read Learn It and play again. You can do it!';
+ $('brk').innerHTML=S.map((s,k)=>`<tr><td>${s.e} ${s.t}</td><td style="text-align:right"><b>${sc[k]}/${cnt[k]}</b></td></tr>`).join('')}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.s)say(b.dataset.s);
+ else if(b.classList.contains('opt')&&!done)pick(b)});
+</script></body></html>
