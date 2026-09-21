@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plural Power! Irregular Plural Nouns</title>
+<style>
+:root{--bg:#dff3ff;--card:#fff;--ink:#23303f;--soft:#5b6b7c;--line:#23303f;--green:#1e9e56;--gold:#ffc72c;--coral:#ff6b57;--blue:#2f8fe0;--board:#1f5f45;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14212e;--card:#1f2f40;--ink:#f1f5f9;--soft:#a9b8c8;--line:#6f8aa5}}
+:root[data-theme="dark"]{--bg:#14212e;--card:#1f2f40;--ink:#f1f5f9;--soft:#a9b8c8;--line:#6f8aa5}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 clamp(17px,2.6vw,21px)/1.45 "Baloo 2","Trebuchet MS","Comic Sans MS",system-ui,sans-serif}
+.top{background:var(--board);border-bottom:8px solid #b7793b;color:#fff;padding:12px 16px}
+.row{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{margin:0;font-size:clamp(24px,5vw,34px);font-weight:800;color:#fff}
+h2{margin:0 0 6px;font-size:clamp(22px,4.5vw,30px);font-weight:800}
+.score{background:var(--gold);color:#23303f;border-radius:999px;padding:2px 14px;font-weight:800;white-space:nowrap}
+.bar{max-width:760px;margin:6px auto 0;height:14px;border-radius:9px;background:rgba(255,255,255,.25);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
+.pt{max-width:760px;margin:2px auto 0;font-size:15px}
+main{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:22px;box-shadow:0 6px 0 var(--line);padding:18px clamp(14px,4vw,28px) 22px}
+.tag{display:inline-block;background:var(--blue);color:#fff;border-radius:999px;padding:2px 14px;font-weight:800}
+.ins{color:var(--soft);margin:6px 0 12px}
+.q{font-size:clamp(21px,4.4vw,28px);font-weight:700;line-height:1.4;margin:8px 0 14px}
+.em{font-size:1.5em;margin-right:8px}
+.blank{display:inline-block;min-width:70px;border-bottom:4px dashed var(--coral);text-align:center;color:var(--coral)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.b{border:3px solid var(--line);border-radius:16px;padding:8px 16px;background:var(--card);color:var(--ink);box-shadow:0 4px 0 var(--line);font-weight:800;font-size:1.08em;min-height:54px}
+.b:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.b:focus-visible,input:focus-visible{outline:4px solid var(--blue);outline-offset:2px}
+.b.go{background:var(--green);color:#fff;border-color:#0d4a27;box-shadow:0 4px 0 #0d4a27}
+.b.gold{background:var(--gold);color:#23303f;border-color:#23303f;box-shadow:0 4px 0 #23303f}
+.b.sing{background:#fff3c4;color:#23303f}.b.plur{background:#d6ebff;color:#23303f}
+.b.sel{background:#fff3c4;color:#23303f;border-color:var(--blue)}
+.b.ok{background:#c9f2d7;color:#143b25;border-color:var(--green)}
+.b.no{background:#ffd9d3;color:#6b1d12;border-color:var(--coral)}
+.b:disabled{cursor:default}.b:disabled:not(.ok):not(.no){opacity:.6}
+.shake{animation:sh .3s}@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}.bar i{transition:none}}
+.fb{margin:16px 0 0;padding:12px 16px;border-radius:16px;border:3px solid;font-weight:700}
+.fb:empty{display:none}
+.fb.ok{background:#c9f2d7;color:#143b25;border-color:var(--green)}
+.fb.no{background:#ffe3de;color:#6b1d12;border-color:var(--coral)}
+.fb.hint{background:#fff3c4;color:#5a4300;border-color:var(--gold)}
+#nx{margin-top:14px;text-align:right}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:14px}.col{display:flex;flex-direction:column;gap:10px}
+.typ{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+input{font:inherit;font-size:1.2em;padding:8px 14px;border:3px solid var(--line);border-radius:14px;width:min(240px,100%);background:var(--card);color:var(--ink)}
+.big{font-size:clamp(34px,9vw,54px);font-weight:800;text-align:center;margin:8px 0 16px}
+.w{margin:4px;padding:4px 12px;min-height:46px;font-size:1.1em;box-shadow:0 3px 0 var(--line)}
+.ex{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:12px 0}
+.pill{background:#fff8dc;color:#23303f;border:2px solid #e2b93b;border-radius:14px;padding:4px 12px}
+.end{text-align:center}.trophy{font-size:72px;line-height:1.1}.end .ex{text-align:left}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="row"><h1>📚 Plural Power!</h1><div class="score" id="sc">⭐ 0</div></div>
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+  <div class="pt" id="pt"></div>
+</header>
+<main id="app"></main>
+<script>
+const $=s=>document.querySelector(s),app=$('#app');
+const P={child:'children',tooth:'teeth',foot:'feet',mouse:'mice',man:'men',woman:'women',person:'people',leaf:'leaves',loaf:'loaves',sheep:'sheep'};
+const E={child:'🧒',tooth:'🦷',foot:'🦶',mouse:'🐭',man:'👨',woman:'👩',person:'🧑',leaf:'🍃',loaf:'🍞',sheep:'🐑'};
+const YAY=['Great job! 🌟','You got it! 🎉','Super! 💪','Well done, star! ⭐','Yes! Nice thinking! 👏'];
+const yay=()=>YAY[Math.random()*YAY.length|0];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const same=s=>P[s]===s;
+const sg=w=>Object.keys(P).find(k=>P[k]===w&&k!==w)||w;
+const rule=s=>same(s)?`"${s}" stays the same. One ${s}, two ${s}!`:`The plural of "${s}" is "${P[s]}". ${/f$/.test(s)?'We change f to ves.':'It is a special word, so we do not just add -s.'}`;
+const ok1=s=>`One ${s}, two ${P[s]}.`;
+const mk=(t,c)=>{const e=document.createElement('button');e.type='button';e.className=c;e.textContent=t;return e};
+
+const SEC=[
+{t:'Choose the Plural',e:'🎯',i:'Tap the word that finishes the sentence.'},
+{t:'Match It',e:'🔗',i:'Tap a word on the left. Then tap its plural on the right.'},
+{t:'Fill in the Blank',e:'✏️',i:'Finish the sentence with the plural word.'},
+{t:'Sort It',e:'🧺',i:'Is the word about one thing, or many things?'},
+{t:'Challenge Round',e:'🏆',i:'Find the wrong word. Then fix it.'}];
+const CH=[['Kemar lost one tooth. Sam lost two ___.','tooth',['teeth','tooths','teeths']],
+['Many ___ play cricket at recess.','child',['children','childs','childrens']],
+['The cat saw two little ___ in the kitchen.','mouse',['mice','mouses','mouse']],
+['Mom bought three ___ of bread at the shop.','loaf',['loaves','loafs','loafes']]];
+const FL=[['Kayla ran a race. Now her two ___ are sore.','foot',['feet','foots','feets']],
+['Lots of ___ shop at the market on Saturday.','person',['people','persons','peoples']],
+['Miss Brown and Miss Reid are two kind ___.','woman'],
+['Two ___ sat under the mango tree.','man'],
+['The farmer has four ___ in the field.','sheep']];
+const SO=[['tooth',0],['feet',1],['child',0],['mice',1],['woman',0],['people',1]];
+const MT=['child','foot','mouse','woman','leaf'];
+const CG=[['The childs sing a happy song.','childs','child',['children','childrens','childes']],
+['I brush my tooths every day.','tooths','tooth',['teeth','teeths','toothes']],
+['Three sheeps eat grass on the hill.','sheeps','sheep',['sheep','sheepes','sheepen']],
+['Two mans ride bikes to work.','mans','man',['men','mens','manes']]];
+const screens=[
+...CH.map(x=>({sec:0,t:'c',q:x[0],s:x[1],o:x[2]})),
+{sec:1,t:'m',n:5},
+...FL.map(x=>({sec:2,t:x[2]?'c':'f',q:x[0],s:x[1],o:x[2]})),
+...SO.map(x=>({sec:3,t:'s',w:x[0],p:x[1]})),
+...CG.map(x=>({sec:4,t:'g',q:x[0],w:x[1],s:x[2],o:x[3]}))];
+const TOTAL=screens.reduce((n,s)=>n+(s.n||1),0);
+let si=-1,score=0,done=0;
+
+function head(){
+  $('#sc').textContent='⭐ '+score;
+  $('#bar').style.width=done/TOTAL*100+'%';
+  $('#pt').textContent=si<0?'Learn first, then play!':si>=screens.length?'All done!':`Question ${Math.min(done+1,TOTAL)} of ${TOTAL}`;
+}
+function fb(g,m){const f=$('#fb');f.className='fb '+(g===1?'ok':g===0?'no':'hint');f.textContent=m}
+function nextBtn(){
+  const last=si===screens.length-1,b=mk(last?'See my score':'Next','b go');
+  b.onclick=()=>{si++;show()};$('#nx').replaceChildren(b);b.focus();
+}
+function res(g,m){done++;if(g)score++;fb(g,m);head();nextBtn()}
+
+const R={
+c(s,b){
+  const a=P[s.s];
+  b.innerHTML=`<p class="q"><span class="em">${E[s.s]}</span>${s.q.replace('___','<span class="blank">?</span>')}</p><div class="opts"></div>`;
+  const box=b.lastChild;
+  shuf(s.o).forEach(o=>{
+    const x=mk(o,'b');
+    x.onclick=()=>{
+      [...box.children].forEach(y=>{y.disabled=true;if(y.textContent===a)y.classList.add('ok')});
+      if(o===a)res(1,`${yay()} ${ok1(s.s)}`);else{x.classList.add('no');res(0,`Not quite. ${rule(s.s)}`)}
+    };
+    box.append(x);
+  });
+},
+f(s,b){
+  const a=P[s.s];
+  b.innerHTML=`<p class="q"><span class="em">${E[s.s]}</span>${s.q.replace('___','<span class="blank">?</span>')}</p><p class="ins">Hint: one ${s.s}. Type the plural word.</p><div class="typ"><input id="in" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Type the plural word"></div>`;
+  const i=$('#in'),g=mk('Check','b gold');$('.typ').append(g);
+  const chk=()=>{
+    const v=i.value.trim().toLowerCase();
+    if(!v){fb(2,'Type your answer first. 🙂');return}
+    i.disabled=g.disabled=true;
+    if(v===a)res(1,`${yay()} ${same(s.s)?`One ${s.s}, two ${s.s}.`:ok1(s.s)}`);
+    else res(0,`Not quite. You typed "${v}". ${rule(s.s)}`);
+  };
+  g.onclick=chk;i.onkeydown=e=>{if(e.key==='Enter')chk()};
+},
+s(s,b){
+  b.innerHTML=`<div class="big">${s.w}</div><div class="opts"></div>`;
+  const box=b.lastChild,p=s.p;
+  const why=p?`"${s.w}" is plural. It means more than one. One is "${sg(s.w)}".`:`"${s.w}" is singular. It means only one. The plural is "${P[s.w]}".`;
+  [['🧺 One (singular)','b sing'],['🧺 Many (plural)','b plur']].forEach((d,n)=>{
+    const x=mk(d[0],d[1]);
+    x.onclick=()=>{
+      [...box.children].forEach((y,k)=>{y.disabled=true;if(k===p)y.classList.add('ok')});
+      if(n===p)res(1,`${yay()} ${why}`);else{x.classList.add('no');res(0,`Not quite. ${why}`)}
+    };
+    box.append(x);
+  });
+},
+g(s,b){
+  const a=P[s.s],clean=t=>t.replace(/[^a-z]/gi,'').toLowerCase();
+  b.innerHTML=`<p class="ins" id="gi">Tap the wrong word.</p><div id="sn" class="q"></div><div id="st2"></div>`;
+  const sn=$('#sn');
+  s.q.split(' ').forEach(t=>{
+    const x=mk(t,'b w');
+    x.onclick=()=>{
+      [...sn.children].forEach(y=>y.disabled=true);
+      if(clean(t)===s.w){
+        x.classList.add('sel');$('#gi').textContent='Good eyes! Now pick the right word:';
+        const box=document.createElement('div');box.className='opts';
+        shuf(s.o).forEach(o=>{
+          const z=mk(o,'b');
+          z.onclick=()=>{
+            [...box.children].forEach(y=>{y.disabled=true;if(y.textContent===a)y.classList.add('ok')});
+            if(o===a)res(1,`${yay()} "${s.w}" was wrong. ${ok1(s.s)}`);
+            else{z.classList.add('no');res(0,`Not quite. The right word is "${a}". ${rule(s.s)}`)}
+          };
+          box.append(z);
+        });
+        $('#st2').append(box);
+      }else{
+        x.classList.add('sel');
+        [...sn.children].forEach(y=>{if(clean(y.textContent)===s.w)y.classList.add('no')});
+        res(0,`That word is fine. The wrong word is "${s.w}". ${rule(s.s)}`);
+      }
+    };
+    sn.append(x);
+  });
+},
+m(s,b){
+  let sel=null,left=0;const tried={};
+  b.innerHTML=`<div class="mt"><div class="col" id="L"></div><div class="col" id="Rt"></div></div>`;
+  const L=$('#L'),Rt=$('#Rt');
+  MT.forEach(k=>{
+    const x=mk(`${E[k]} ${k}`,'b');x.dataset.k=k;
+    x.onclick=()=>{
+      if(x.classList.contains('ok'))return;
+      [...L.children].forEach(y=>y.classList.remove('sel'));
+      sel=k;x.classList.add('sel');fb(2,`Now tap the plural of "${k}".`);
+    };
+    L.append(x);
+  });
+  shuf(MT).forEach(k=>{
+    const p=P[k],x=mk(p,'b');
+    x.onclick=()=>{
+      if(x.classList.contains('ok'))return;
+      if(!sel){fb(2,'Tap a word on the left first.');return}
+      if(P[sel]===p){
+        const l=[...L.children].find(y=>y.dataset.k===sel);
+        l.classList.remove('sel');l.classList.add('ok');l.disabled=true;
+        x.classList.add('ok');x.disabled=true;
+        done++;if(!tried[sel])score++;
+        fb(1,`${yay()} ${ok1(sel)}`);head();sel=null;
+        if(++left===MT.length)nextBtn();
+      }else{
+        tried[sel]=1;x.classList.add('shake');setTimeout(()=>x.classList.remove('shake'),400);
+        fb(0,`Not this one. ${rule(sel)} Try again!`);
+      }
+    };
+    Rt.append(x);
+  });
+}};
+
+function intro(){
+  app.innerHTML=`<section class="card"><h2>What is an irregular plural?</h2>
+  <p>A <b>plural</b> noun means <b>more than one</b>. Most plurals just add <b>-s</b>: one dog, two dogs. 🐶</p>
+  <p>But some special words <b>change</b>. These are <b>irregular plurals</b>. Look at them:</p>
+  <div class="ex">${Object.keys(P).slice(0,7).map(k=>`<div class="pill">${E[k]} <b>${k}</b> → <b>${P[k]}</b></div>`).join('')}</div>
+  <p>A few words do not change at all: one sheep, two sheep. 🐑</p>
+  <p class="ins">There are ${TOTAL} questions. You get a ⭐ for each right answer!</p>
+  <button id="go" class="b go">Let's play!</button></section>`;
+  $('#go').onclick=()=>{si=0;show()};
+}
+function end(){
+  const pc=Math.round(score/TOTAL*100);
+  const m=pc>=90?['🏆','Superstar!','You know your irregular plurals very well.']:pc>=70?['🌟','Great work!','You know many irregular plurals.']:pc>=50?['👍','Good try!','You are learning. Play again to do even better.']:['🌱','Keep going!','Read the examples again, then try once more.'];
+  app.innerHTML=`<section class="card end"><div class="trophy">${m[0]}</div><h2>${m[1]}</h2>
+  <p style="font-size:1.3em">You got <b>${score}</b> out of <b>${TOTAL}</b>!</p><p>${m[2]}</p>
+  <div class="ex">${Object.keys(P).map(k=>`<div class="pill">${E[k]} ${k} → <b>${P[k]}</b></div>`).join('')}</div>
+  <button id="again" class="b go">Try again</button></section>`;
+  $('#again').onclick=()=>{score=0;done=0;si=0;show()};
+}
+function show(){
+  head();
+  if(si<0)return intro();
+  if(si>=screens.length)return end();
+  const s=screens[si],c=SEC[s.sec];
+  app.innerHTML=`<section class="card"><span class="tag">${c.e} ${c.t}</span><p class="ins">${c.i}</p><div id="bd"></div><div id="fb" class="fb" role="status" aria-live="polite"></div><div id="nx"></div></section>`;
+  R[s.t](s,$('#bd'));
+  window.scrollTo({top:0});
+}
+show();
+</script>
+</body>
+</html>
