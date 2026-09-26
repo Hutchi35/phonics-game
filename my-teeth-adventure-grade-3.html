@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Teeth Adventure - Grade 3</title>
+<style>
+:root{
+  --green:#0a7d3c; --gold:#f5b301; --black:#151515; --pink:#ffe3ea;
+  --ink:#22303a; --card:#ffffff; --bg1:#eaf7ee; --bg2:#fff7de;
+  --ok:#0a7d3c; --bad:#c0392b;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;font-family:'Baloo 2',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink)}
+@font-face{font-family:'Baloo 2';src:local('Baloo 2');}
+.wrap{max-width:760px;margin:0 auto;padding:16px 14px 40px}
+header.top{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--green);color:#fff;border-radius:0 0 22px 22px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+header.top .tooth{font-size:28px}
+header.top h1{font-size:18px;margin:0;flex:1;line-height:1.2}
+.badge{background:var(--gold);color:var(--black);font-weight:800;border-radius:999px;padding:6px 12px;font-size:14px;white-space:nowrap}
+.progress-wrap{height:10px;background:rgba(255,255,255,.35);border-radius:8px;overflow:hidden;margin:10px 16px 0}
+.progress-bar{height:100%;background:var(--gold);width:0%;transition:width .4s}
+main{padding-top:14px}
+.card{background:var(--card);border-radius:20px;padding:20px;box-shadow:0 6px 18px rgba(20,60,40,.08);margin-bottom:16px;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{color:var(--green);font-size:22px;margin:0 0 8px}
+h3{color:var(--black);font-size:18px;margin:14px 0 6px}
+p{font-size:16px;line-height:1.5;margin:6px 0}
+ul{font-size:16px;line-height:1.6;padding-left:22px}
+.pill{display:inline-block;background:var(--pink);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;color:#8a2244;margin-bottom:8px}
+button{font-family:inherit;cursor:pointer}
+.btn{background:var(--green);color:#fff;border:none;border-radius:16px;padding:14px 22px;font-size:17px;font-weight:700;box-shadow:0 4px 0 #075c2b;transition:transform .1s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #075c2b}
+.btn.gold{background:var(--gold);color:var(--black);box-shadow:0 4px 0 #b98200}
+.btn.gold:active{box-shadow:0 1px 0 #b98200}
+.btn.outline{background:#fff;color:var(--green);border:2px solid var(--green);box-shadow:none}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.hotspots{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.hotspot{background:var(--bg1);border:2px solid var(--green);border-radius:16px;padding:12px 16px;font-size:15px;font-weight:700;color:var(--green);min-width:120px;text-align:center}
+.hotspot.done{background:var(--green);color:#fff}
+.info-box{background:var(--bg2);border-left:6px solid var(--gold);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.mouth{display:flex;justify-content:center;gap:6px;margin:14px 0;flex-wrap:wrap}
+.tooth-shape{width:44px;height:56px;background:#fff;border:3px solid #d8d8d8;border-radius:10px 10px 16px 16px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.tooth-shape.inc{background:#fdf6e3}
+.tooth-shape.can{background:#ffe9d6}
+.tooth-shape.mol{background:#e6f3ff}
+.opt-btn{display:block;width:100%;text-align:left;background:#fff;border:2px solid #d3e4d9;border-radius:14px;padding:13px 16px;font-size:16px;margin:8px 0;color:var(--ink);font-weight:600}
+.opt-btn:hover{border-color:var(--green)}
+.opt-btn.correct{background:#e4f8ea;border-color:var(--ok);color:var(--ok)}
+.opt-btn.wrong{background:#fdeceb;border-color:var(--bad);color:var(--bad)}
+.opt-btn[disabled]{cursor:default}
+.feedback{border-radius:14px;padding:12px 14px;margin-top:10px;font-weight:700;font-size:15px}
+.feedback.ok{background:#e4f8ea;color:var(--ok)}
+.feedback.bad{background:#fdeceb;color:var(--bad)}
+.feedback p{font-weight:500;margin-top:4px}
+.section-tag{font-size:13px;font-weight:800;letter-spacing:.3px;color:#fff;background:var(--green);display:inline-block;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.score-final{font-size:44px;font-weight:800;color:var(--green);text-align:center;margin:6px 0}
+.teacher{background:#fff;border:2px dashed var(--green);border-radius:16px;padding:16px;font-size:14px;margin-top:16px}
+.teacher h3{margin-top:0}
+.teacher ul{font-size:13.5px}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg1:#0f1f16;--bg2:#1b1808;--card:#182420;--ink:#eef3ef;}
+  .opt-btn{background:#1f2b26;border-color:#31463b;color:#eef3ef}
+  .hotspot{background:#12231a}
+  .tooth-shape{background:#22302a;border-color:#3a4d43}
+  .info-box{background:#22301c;color:#eef3ef}
+}
+:root[data-theme="dark"]{--bg1:#0f1f16;--bg2:#1b1808;--card:#182420;--ink:#eef3ef;}
+.hide{display:none!important}
+.ra-block{display:inline}
+.ra-btn{background:#eef7f1;border:2px solid var(--green);color:var(--green);border-radius:12px;padding:6px 12px;font-size:14px;font-weight:800;margin:4px 6px 10px 0;display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.ra-text{display:inline;font-size:inherit}
+.w{transition:background .1s}
+.w.hl{background:var(--gold);border-radius:4px;box-shadow:0 0 0 3px var(--gold)}
+.vocab-word{background:var(--pink);border:2px solid #d98bab;color:#8a2244;border-radius:10px;padding:4px 12px;font-size:15px;font-weight:800;margin:2px 6px 8px 0;display:inline-block}
+.ra-bar{position:fixed;left:0;right:0;bottom:0;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--black);color:#fff;display:flex;align-items:center;gap:10px;justify-content:center;padding-top:8px;padding-left:14px;padding-right:14px;z-index:30;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+.ra-bar button{background:rgba(255,255,255,.12);border:none;color:#fff;font-size:22px;padding:6px 12px;border-radius:12px}
+.ra-bar-label{font-size:13px;opacity:.85}
+.wrap{padding-bottom:76px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="tooth">🦷</div>
+  <h1>My Teeth Adventure</h1>
+  <div class="badge">⭐ <span id="scoreTop">0</span></div>
+</header>
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="wrap"><main id="app"></main></div>
+
+<div class="ra-bar hide" id="raBar">
+  <button id="raToggleBtn" onclick="raToggle()" aria-label="Play or pause">⏸️</button>
+  <button onclick="raReplay()" aria-label="Read again">🔁</button>
+  <button onclick="raStop()" aria-label="Stop">⏹️</button>
+  <span class="ra-bar-label">Reading aloud…</span>
+</div>
+
+<script>
+/* ---------- CONTENT (from Jamaica Grade 3 NSC Integrated Studies, Term 1 Unit 1) ---------- */
+const GOALS = [
+ "Learn what teeth are and why we need them",
+ "Learn the difference between temporary (primary/milk/baby) teeth and permanent teeth",
+ "Identify the parts of a tooth: crown, root and enamel",
+ "Identify and describe incisors, canines and molars, and what each one does"
+];
+
+const EXPLORE = [
+ {t:"What are teeth?", a:"Teeth are the hard, white parts inside our mouth. We use them every day!"},
+ {t:"Why do we need teeth?", a:"We need teeth to bite and chew our food, and to help us speak and smile clearly."},
+ {t:"How do teeth help us?", a:"Teeth cut, tear and grind our food into small pieces so it is easy to eat and swallow."},
+ {t:"Parts of a tooth", a:"Crown - the part you can see above the gum. Root - the part under the gum that holds the tooth in place. Enamel - the hard, shiny covering that protects the tooth."}
+];
+
+const TYPES = [
+ {name:"Incisors", common:"front teeth", where:"at the front of the mouth", fn:"biting and cutting food", ex:"Biting into a slice of mango", cls:"inc", emoji:"▭"},
+ {name:"Canines", common:"eye teeth", where:"next to the incisors, pointy", fn:"tearing and gripping food", ex:"Tearing a piece of jerk chicken", cls:"can", emoji:"▲"},
+ {name:"Molars", common:"jaw teeth", where:"at the back of the mouth, wide and flat", fn:"crushing and grinding food", ex:"Grinding up rice and peas", cls:"mol", emoji:"◼"}
+];
+
+/* ---------- READ-ALOUD / FOLLOW-ALONG ENGINE ---------- */
+let raCounter=0, raState=null, raPausedFlag=false;
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+// Wraps text as clickable, highlight-able words with a Read Aloud button. label lets us say "Hear This" for short instructions.
+function ra(text,label){
+  const id='ra'+(raCounter++);
+  const words=text.split(/\s+/).filter(Boolean);
+  const spans=words.map((w,i)=>`<span class="w" data-i="${i}">${esc(w)}</span>`).join(' ');
+  return `<span class="ra-block"><button class="ra-btn" onclick="raStart('${id}')">🔊 ${label||'Read Aloud'}</button> <span class="ra-text" id="${id}" data-raw="${encodeURIComponent(text)}">${spans}</span></span>`;
+}
+// Click-to-hear-pronounced vocabulary word/phrase.
+function vocab(word){
+  return `<button class="vocab-word" onclick="speakWord('${word.replace(/'/g,"\\'")}')">${esc(word)} 🔊</button>`;
+}
+function clearHighlights(id){ document.querySelectorAll('#'+id+' .w.hl').forEach(w=>w.classList.remove('hl')); }
+function updateRaBar(){
+  const bar=document.getElementById('raBar');
+  if(raState){ bar.classList.remove('hide'); document.getElementById('raToggleBtn').textContent = raPausedFlag ? '▶️' : '⏸️'; }
+  else { bar.classList.add('hide'); }
+}
+function stopReading(){
+  speechSynthesis.cancel();
+  if(raState) clearHighlights(raState.id);
+  raState=null; raPausedFlag=false;
+  updateRaBar();
+}
+function raStart(id){
+  stopReading();
+  const el=document.getElementById(id);
+  if(!el) return;
+  const raw=decodeURIComponent(el.dataset.raw);
+  const words=raw.split(/\s+/).filter(Boolean);
+  raState={id, words, idx:0};
+  updateRaBar();
+  raSpeakFrom(0);
+}
+function raSpeakFrom(idx){
+  if(!raState) return;
+  if(idx>=raState.words.length){ clearHighlights(raState.id); raState=null; updateRaBar(); return; }
+  raState.idx=idx;
+  clearHighlights(raState.id);
+  const el=document.getElementById(raState.id);
+  if(el){ const span=el.querySelector(`.w[data-i="${idx}"]`); if(span) span.classList.add('hl'); }
+  const u=new SpeechSynthesisUtterance(raState.words[idx]);
+  u.rate=0.75; u.pitch=1.05;
+  const myId=raState.id;
+  u.onend=()=>{ if(raState && raState.id===myId && !raPausedFlag) raSpeakFrom(idx+1); };
+  speechSynthesis.speak(u);
+  updateRaBar();
+}
+function raToggle(){ if(!raState) return; if(raPausedFlag){ raPausedFlag=false; raSpeakFrom(raState.idx); } else { raPausedFlag=true; speechSynthesis.cancel(); updateRaBar(); } }
+function raReplay(){ if(raState){ raPausedFlag=false; raSpeakFrom(0); } }
+function raStop(){ stopReading(); }
+function speakWord(word){ stopReading(); const u=new SpeechSynthesisUtterance(word); u.rate=0.7; u.pitch=1.05; speechSynthesis.speak(u); }
+
+// Practice question banks. type: mc = pick correct option
+function mk(section,q,o,c,ok,bad){return{section,q,o,c,ok,bad};}
+const SETS_Q=[
+ mk("Sets of Teeth","I am the first set of teeth a baby gets.",["Primary (temporary/milk) teeth","Permanent teeth"],0,"That's right! Babies get primary teeth first.","Not quite. Think about which teeth come FIRST, when we are babies."),
+ mk("Sets of Teeth","I am also called milk teeth or baby teeth.",["Primary teeth","Permanent teeth"],0,"Great job! Primary teeth have those nicknames.","Not yet. 'Milk teeth' is another name for the FIRST set of teeth."),
+ mk("Sets of Teeth","I am the second set of teeth that replace the first set.",["Primary teeth","Permanent teeth"],1,"You identified it correctly! Permanent teeth replace primary teeth.","Have another look - which set comes SECOND, after primary teeth fall out?"),
+ mk("Sets of Teeth","I need to be cared for well because I should last for most of a person's life.",["Primary teeth","Permanent teeth"],1,"That's correct! Permanent teeth need to last a long time.","Not quite. Which set of teeth stays with us the longest?")
+];
+const MATCH_Q=[
+ mk("Match the Tooth","Incisors are mainly used for...",["Cutting food","Tearing food","Grinding food"],0,"Great job! Incisors cut and bite food.","Not quite. Incisors are the front teeth - think about what a front tooth does first when you bite an apple."),
+ mk("Match the Tooth","Canines are mainly used for...",["Cutting food","Tearing food","Grinding food"],1,"That's correct! Canines tear and grip food.","Not yet. Canines are pointy - pointy teeth help us tear food."),
+ mk("Match the Tooth","Molars are mainly used for...",["Cutting food","Tearing food","Grinding food"],2,"You matched it correctly! Molars grind food.","Have another try. Molars are flat and wide at the back - they mash food up.")
+];
+const WHICH_Q=[
+ mk("Which Tooth Am I?","I am found at the front of your mouth. I am used for cutting food. Which tooth am I?",["Incisor","Canine","Molar"],0,"Yes! You found the incisor.","Not quite - think about which tooth is at the FRONT and used for cutting."),
+ mk("Which Tooth Am I?","I am pointy and sit next to the front teeth. I tear and grip food. Which tooth am I?",["Incisor","Canine","Molar"],1,"Correct! That's the canine.","Try again - which tooth is pointy and helps tear food?"),
+ mk("Which Tooth Am I?","I am found at the back of the mouth. I am wide and flat, and I grind food. Which tooth am I?",["Incisor","Canine","Molar"],2,"That's right, it's the molar!","Not yet - which tooth is at the BACK and grinds food?")
+];
+const SORT_Q=[
+ mk("Sort It","Used for biting into an apple",["Incisor","Canine","Molar"],0,"Great sorting! That's an incisor job.","Think again - biting the first piece off food uses the front teeth."),
+ mk("Sort It","Used for tearing a piece of jerk chicken",["Incisor","Canine","Molar"],1,"Well sorted! Canines tear food.","Not quite - which pointy tooth tears meat?"),
+ mk("Sort It","Used for grinding rice and peas before swallowing",["Incisor","Canine","Molar"],2,"Perfect sorting! Molars grind food.","Try again - which flat tooth at the back grinds food?"),
+ mk("Sort It","Found at the very front of the mouth",["Incisor","Canine","Molar"],0,"That's correct, incisors are at the front!","Not quite - which tooth sits right at the front?")
+];
+const COMPLETE_Q=[
+ mk("Complete the Sentence","We use our ______ to cut our food.",["Incisors","Canines","Molars"],0,"That's correct!","Not quite - which tooth cuts food?"),
+ mk("Complete the Sentence","Our ______ help us tear and grip our food.",["Incisors","Canines","Molars"],1,"Great job!","Not yet - which tooth tears food?"),
+ mk("Complete the Sentence","We use our ______ at the back of the mouth to grind our food.",["Incisors","Canines","Molars"],2,"You completed it correctly!","Have another go - which tooth grinds food?"),
+ mk("Complete the Sentence","Our very first set of teeth are called ______ teeth.",["temporary (primary/milk)","permanent"],0,"That's right!","Not quite - which set of teeth comes first?")
+];
+const PRACTICE = [...SETS_Q,...MATCH_Q,...WHICH_Q,...SORT_Q,...COMPLETE_Q];
+
+const CHALLENGE_Q=[
+ mk("Teeth Challenge","What are teeth?",["Hard parts in our mouth that help us eat and speak","Soft parts of our hair","Bones in our arm"],0,"Great job! You identified the tooth correctly.","Not quite - think about what teeth actually are."),
+ mk("Teeth Challenge","Why do we need teeth?",["To help us bite, chew and talk clearly","To help us hear better","To help us see better"],0,"That's correct!","Have another think about what teeth help us do."),
+ mk("Teeth Challenge","Which part of the tooth can you SEE above the gum?",["Crown","Root","Enamel"],0,"Yes! The crown is the visible part.","Not quite - the visible part has a different name."),
+ mk("Teeth Challenge","Which part of the tooth is UNDER the gum, holding it in place?",["Crown","Root","Enamel"],1,"Correct, that's the root!","Try again - which part is hidden under the gum?"),
+ mk("Teeth Challenge","Which part of the tooth is the hard, shiny outer covering?",["Crown","Root","Enamel"],2,"That's right, enamel protects the tooth!","Not quite - think about the tooth's protective covering."),
+ mk("Teeth Challenge","I am the first set of teeth a baby gets. What am I?",["Primary (temporary/milk) teeth","Permanent teeth"],0,"Great job!","Not yet - which set comes first?"),
+ mk("Teeth Challenge","I am also called milk teeth. What am I?",["Primary teeth","Permanent teeth"],0,"That's correct!","Not quite - 'milk teeth' is a nickname for which set?"),
+ mk("Teeth Challenge","I replace the primary teeth and should last most of a lifetime. What am I?",["Primary teeth","Permanent teeth"],1,"You identified it correctly!","Have another look - which set replaces the first set?"),
+ mk("Teeth Challenge","Which tooth is used for CUTTING food?",["Incisor","Canine","Molar"],0,"Great job, that's the incisor!","Not quite - think about the front teeth."),
+ mk("Teeth Challenge","Which tooth is used for TEARING food?",["Incisor","Canine","Molar"],1,"That's correct, the canine!","Try again - which pointy tooth tears food?"),
+ mk("Teeth Challenge","Which tooth is used for GRINDING food?",["Incisor","Canine","Molar"],2,"Correct! Molars grind food.","Not quite - which flat tooth is at the back?"),
+ mk("Teeth Challenge","Where are incisors found in the mouth?",["Front","Back","Sides only"],0,"Yes, at the front!","Not quite - where do you find the cutting teeth?"),
+ mk("Teeth Challenge","Where are molars found in the mouth?",["Front","Back","Top only"],1,"That's right, at the back!","Have another think - where are the grinding teeth?"),
+ mk("Teeth Challenge","Which tooth would you use to bite into a mango?",["Incisor","Canine","Molar"],0,"Great job!","Not quite - which tooth bites first?"),
+ mk("Teeth Challenge","Which tooth would you use to tear a piece of jerk chicken?",["Incisor","Canine","Molar"],1,"Correct!","Try again - which tooth tears meat?"),
+ mk("Teeth Challenge","Which tooth would you use to grind up rice and peas?",["Incisor","Canine","Molar"],2,"That's correct!","Not yet - which tooth grinds food into small bits?"),
+ mk("Teeth Challenge","Complete: We use our ______ to cut our food.",["Incisors","Canines","Molars"],0,"You completed it correctly!","Not quite - which tooth cuts?"),
+ mk("Teeth Challenge","Complete: Our ______ tear and grip our food.",["Incisors","Canines","Molars"],1,"Great job!","Have another go - which tooth tears?"),
+ mk("Teeth Challenge","Complete: Our first set of teeth are called ______ teeth.",["temporary","permanent"],0,"That's right!","Not quite - which set comes first, as a baby?"),
+ mk("Teeth Challenge","What should we do to care for our teeth?",["Brush and floss every day, and visit the dentist","Never brush them","Only eat sweets all day"],0,"Great job, that's how we care for our teeth!","Think again about healthy habits for our teeth."),
+ mk("Teeth Challenge","What are the two sets of teeth people have called?",["Temporary and permanent teeth","Big teeth and small teeth","Fast teeth and slow teeth"],0,"Correct! Temporary and permanent teeth.","Not quite - think about the two names used for our sets of teeth."),
+ mk("Teeth Challenge","A tooth with a pointy shape, used for tearing, common name 'eye tooth' - what type is it?",["Incisor","Canine","Molar"],1,"You identified the tooth correctly, it's the canine!","Not quite - 'eye tooth' is the nickname for which type?")
+];
+
+/* ---------- ENGINE ---------- */
+let score=0, qIndex=0, retried=false;
+const totalSteps = 2 /*intro+explore*/ + 1 /*types*/ + PRACTICE.length + CHALLENGE_Q.length + 1 /*results*/;
+let step=0;
+const app=document.getElementById('app');
+const scoreTop=document.getElementById('scoreTop');
+const bar=document.getElementById('progressBar');
+
+function updateProgress(){ bar.style.width = Math.min(100, Math.round((step/totalSteps)*100)) + "%"; }
+function addScore(n){ score+=n; scoreTop.textContent=score; }
+
+function renderIntro(){
+  stopReading();
+  app.innerHTML = `<div class="card">
+    <span class="pill">Grade 3 &middot; Integrated Studies</span>
+    <h2>Welcome to My Teeth Adventure! 🦷</h2>
+    <p>${ra("Let's explore our teeth together! Here is what you will learn today.")}</p>
+    <ul>${GOALS.map(g=>`<li>${ra(g)}</li>`).join('')}</ul>
+    <div class="row-btns"><button class="btn" onclick="goExplore()">Start Learning!</button></div>
+  </div>`;
+}
+function goExplore(){ step=1; updateProgress(); renderExplore(); }
+
+function renderExplore(){
+  stopReading();
+  app.innerHTML = `<div class="card">
+    <span class="section-tag">1. Explore the Teeth</span>
+    <h2>Tap each box to find out!</h2>
+    <div class="hotspots" id="hs"></div>
+    <div id="infoArea"></div>
+    <div class="row-btns"><button class="btn hide" id="nextBtn" onclick="goTypes()">Next: Types of Teeth</button></div>
+  </div>`;
+  const hs=document.getElementById('hs');
+  EXPLORE.forEach((item,i)=>{
+    const b=document.createElement('button');
+    b.className='hotspot'; b.textContent=item.t;
+    b.onclick=()=>{
+      stopReading();
+      document.getElementById('infoArea').innerHTML=`<div class="info-box"><strong>${item.t}</strong><p>${ra(item.a)}</p></div>`;
+      b.classList.add('done');
+      if([...hs.children].every(c=>c.classList.contains('done'))) document.getElementById('nextBtn').classList.remove('hide');
+    };
+    hs.appendChild(b);
+  });
+}
+function goTypes(){ step=2; updateProgress(); renderTypes(); }
+
+function renderTypes(){
+  stopReading();
+  app.innerHTML = `<div class="card">
+    <span class="section-tag">2. Types of Teeth</span>
+    <h2>Tap a tooth to learn about it</h2>
+    <div class="mouth" id="mouthRow"></div>
+    <div id="typeInfo"></div>
+    <div class="row-btns"><button class="btn hide" id="nextBtn2" onclick="startPractice()">Next: Practice!</button></div>
+  </div>`;
+  const row=document.getElementById('mouthRow');
+  TYPES.forEach(t=>{
+    const b=document.createElement('button');
+    b.className='tooth-shape '+t.cls; b.textContent=t.emoji; b.title=t.name;
+    b.onclick=()=>{
+      stopReading();
+      document.getElementById('typeInfo').innerHTML=`<div class="info-box">${vocab(t.name)}<span> (also called "${t.common}")</span>${ra(t.name+' are found '+t.where+'. They are used for '+t.fn+'. For example: '+t.ex+'.','Read Description')}</div>`;
+      b.style.borderColor='var(--green)';
+      const allDone=[...row.children].every(c=>c.style.borderColor==='var(--green)'||c.style.borderColor.includes('7d'));
+      if(allDone) document.getElementById('nextBtn2').classList.remove('hide');
+    };
+    row.appendChild(b);
+  });
+}
+
+/* generic renderer for a question list; onDone runs at end of list */
+function renderQuestion(list, i, onDone){
+  step++; updateProgress(); stopReading();
+  const item=list[i];
+  app.innerHTML = `<div class="card">
+    <span class="section-tag">${item.section}</span>
+    <p style="opacity:.7;margin-top:0">Question ${i+1} of ${list.length}</p>
+    <h2>${ra(item.q,'Read Question')}</h2>
+    <div id="opts"></div>
+    <div id="fb"></div>
+    <div class="row-btns" id="ctrl"></div>
+  </div>`;
+  const opts=document.getElementById('opts');
+  item.o.forEach((text,oi)=>{
+    const b=document.createElement('button');
+    b.className='opt-btn'; b.textContent=text;
+    b.onclick=()=>{
+      stopReading();
+      const correct = oi===item.c;
+      [...opts.children].forEach(c=>c.disabled=true);
+      b.classList.add(correct?'correct':'wrong');
+      if(correct){
+        opts.children[item.c].classList.add('correct');
+        document.getElementById('fb').innerHTML=`<div class="feedback ok">${ra('Great job! '+item.ok)}</div>`;
+        addScore(10);
+        document.getElementById('ctrl').innerHTML=`<button class="btn" id="cont">Continue</button>`;
+        document.getElementById('cont').onclick=()=>advance(list,i,onDone);
+      } else {
+        document.getElementById('fb').innerHTML=`<div class="feedback bad">${ra(item.bad+' Have another try!')}</div>`;
+        [...opts.children].forEach(c=>{ if(c!==b) c.disabled=false; });
+      }
+    };
+    opts.appendChild(b);
+  });
+}
+function advance(list,i,onDone){
+  const next=i+1;
+  if(next<list.length){ renderQuestion(list,next,onDone); }
+  else { onDone(); }
+}
+
+function playList(list, sectionDoneCallback){
+  let idx=0;
+  function show(){
+    if(idx>=list.length){ sectionDoneCallback(); return; }
+    renderQuestion(list, idx, ()=>{ idx++; show(); });
+  }
+  show();
+}
+
+/* ---------- WIRING (overrides simplified flow) ---------- */
+window.goExplore=function(){ step=1; updateProgress(); renderExplore(); };
+window.goTypes=function(){ step=2; updateProgress(); renderTypes(); };
+window.startPractice=function(){
+  step=3; updateProgress(); stopReading();
+  app.innerHTML=`<div class="card">
+    <span class="section-tag">Sets of Teeth</span>
+    <h2>We have two sets of teeth</h2>
+    <p>${vocab('Primary teeth')}${ra('Primary teeth are our first set. We get them as babies. They are also called milk teeth or baby teeth.')}</p>
+    <p>${vocab('Permanent teeth')}${ra('Permanent teeth are our second set. They grow in to replace primary teeth, and must last us for most of our life.')}</p>
+    <div class="row-btns"><button class="btn" onclick="beginPracticeQuiz()">Let's Practice!</button></div>
+  </div>`;
+};
+window.beginPracticeQuiz=function(){
+  playList(PRACTICE, ()=>{ startChallenge(); });
+};
+window.startChallenge=function(){
+  stopReading();
+  app.innerHTML=`<div class="card">
+    <span class="pill">Great work so far!</span>
+    <h2>3. Teeth Challenge!</h2>
+    <p>${ra("Now let's put it all together with a mixed challenge covering everything you learned.")}</p>
+    <div class="row-btns"><button class="btn gold" onclick="playChallenge()">Start the Challenge!</button></div>
+  </div>`;
+};
+window.playChallenge=function(){
+  playList(CHALLENGE_Q, ()=>{ renderResults(); });
+};
+
+function renderResults(){
+  step=totalSteps; updateProgress(); stopReading();
+  const totalQ = PRACTICE.length + CHALLENGE_Q.length;
+  const maxScore = totalQ*10;
+  const pct=Math.round((score/maxScore)*100);
+  let msg = pct>=80?"Excellent! You really know your teeth!":pct>=50?"Good job! You're learning lots about teeth!":"Nice try! Let's review and try again!";
+  const learned=[
+    "I can explain what teeth are and why we need them.",
+    "I can identify parts of a tooth: crown, root and enamel.",
+    "I know the difference between temporary (primary, milk, baby) teeth and permanent teeth.",
+    "I can identify incisors, canines and molars, and explain their functions.",
+    "I know ways to care for my teeth, like brushing, flossing and visiting the dentist."
+  ];
+  app.innerHTML=`<div class="card">
+   <h2>🎉 Activity Complete!</h2>
+   <div class="score-final">${score} / ${maxScore}</div>
+   <p style="text-align:center">${ra(msg)}</p>
+   <h3>What I Learned ✅</h3>
+   <ul>${learned.map(l=>`<li>${ra(l)}</li>`).join('')}</ul>
+   <div class="row-btns">
+     <button class="btn" onclick="restart()">🔁 Try Again</button>
+   </div>
+   <div class="teacher">
+     <h3>👩‍🏫 Teacher Check</h3>
+     <p><b>Topic:</b> Exploring the Teeth, Sets of Teeth &amp; Types of Teeth<br>
+     <b>Grade:</b> 3 &nbsp;|&nbsp; <b>Curriculum:</b> Jamaica NSC (Integrated Studies, Term 1, Unit 1)<br>
+     <b>Skills Practised:</b> Identifying, classifying, matching, explaining and applying knowledge.</p>
+     <p><b>Attainment Target (Science):</b> Explore the attributes/characteristics/features of people and objects in the environment in order to classify and make comparisons.</p>
+     <p><b>NSC Objectives Addressed:</b></p>
+     <ul>
+       <li>Identify the different types of teeth</li>
+       <li>Identify the external parts of a tooth</li>
+       <li>Distinguish between temporary (primary, milk, baby) and permanent teeth</li>
+       <li>Investigate the functions of the teeth</li>
+       <li>Demonstrate ways we care for our teeth</li>
+     </ul>
+   </div>
+  </div>`;
+}
+function restart(){ stopReading(); score=0; qIndex=0; step=0; scoreTop.textContent=0; updateProgress(); renderIntro(); }
+
+renderIntro();
+</script>
+</body>
+</html>
