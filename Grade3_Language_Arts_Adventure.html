@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 3 Language Arts Adventure: Learn, Play and Win!</title>
+<style>
+:root{--ink:#1d2b4f;--bg:#fff6d8}
+*{box-sizing:border-box}
+body{margin:0;font:20px/1.5 "Trebuchet MS","Comic Sans MS",system-ui,sans-serif;color:var(--ink);background:var(--bg);padding:12px 12px 150px}
+main{max-width:900px;margin:auto}
+h1{font-size:1.7em;text-align:center;margin:.2em 0}
+.card{background:#fff;border:4px solid var(--c,#4a6cf7);border-radius:22px;padding:16px;margin:12px 0}
+button,select{font:inherit;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:14px;padding:8px 14px;margin:4px;cursor:pointer;min-height:48px}
+button:hover:not(:disabled){background:#ffe27a}button:disabled{opacity:.6;cursor:default}
+:focus-visible{outline:4px solid #7b2cff;outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.w{background:var(--c);color:#fff;border:0;border-radius:22px;text-align:left;padding:14px;margin:0;text-shadow:0 1px 2px #0006}
+.w:hover:not(:disabled){background:var(--c);filter:brightness(1.1)}
+.w b{font-size:1.15em}.em{font-size:2.4em;display:block}
+.bar{height:14px;background:#fff6;border-radius:9px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:#ffe27a}
+.opt{display:block;width:100%;text-align:left;background:#f3f6ff}
+.opt.sel,.chip.sel{background:#ffe27a;border-style:dashed}
+.chip{background:#eef9ee}.bk{border:3px dashed var(--ink);border-radius:16px;padding:6px;margin:6px 0;background:#f8f8ff;min-height:60px}
+.bk>b{display:block}
+.rd .w1{border-radius:5px;padding:0 1px}.rd .s{cursor:pointer}.s.on{background:#fff0b3}.w1.on{background:#ffb020;color:#000;box-shadow:0 0 0 2px #ffb020}
+.story{background:#f1fbff;border-radius:14px;padding:10px;font-size:1.1em}
+.q{font-size:1.15em;font-weight:700}
+.ok{background:#dff7df;border:3px solid #1b7a1b}.no{background:#fff0e0;border:3px solid #b35a00}
+.fb{border-radius:14px;padding:8px;margin:8px 0}.fb:empty{display:none}
+#rb{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:4px solid var(--ink);padding:6px;text-align:center;z-index:9}
+#rb button,#rb select{min-height:44px;margin:2px;padding:4px 10px}#rb input{vertical-align:middle;width:90px}
+#st{font-size:.8em;display:block}
+textarea{width:100%;min-height:90px;font:inherit;border-radius:12px;border:3px solid var(--ink);padding:8px}
+.lv button[aria-pressed=true]{background:#ffe27a}
+@media(max-width:600px){body{font-size:18px}}
+</style></head><body><main id="app"></main>
+<div id="rb" role="region" aria-label="Read aloud controls">
+<button id="rp">▶ Read</button><button id="rpa">⏸ Pause</button><button id="rr">⏯ Resume</button><button id="rs">⏹ Stop</button><button id="rx">🔁 Restart</button>
+<label>Speed <input id="rate" type="range" min=".6" max="1.2" step=".1" value=".9"></label>
+<label>Voice <select id="voice" aria-label="Voice"></select></label><span id="st" role="status"></span></div>
+<script>
+"use strict";
+const $=s=>document.querySelector(s),sh=a=>[...a].sort(()=>Math.random()-.5);
+const mc=(p,o,a,e,h,s)=>({t:'mc',p,o,a,e,h,s}),so=(p,i,b,a,e)=>({t:'so',p,i,b,a,e}),od=(p,i,e)=>({t:'od',p,i,e}),wr=(p,m,c,s)=>({t:'wr',p,m,c,s});
+const PUP="Sam was walking home from school when he saw a small puppy near a tree. The puppy looked frightened and was alone. Sam checked its collar but could not find a name. He asked some neighbours if they knew the puppy. After a while, a little girl came running down the road looking for her puppy. Sam returned the puppy to her, and she thanked him happily.";
+const W=[
+{n:"Grammar World",em:"🦷",c:"#e0457b",intro:"Hello, Plural Word Detective! Some words do not follow the usual rule when they mean more than one. Let us find out why!",q:[
+mc("🐱 cat → cats. What do we usually add to make a regular plural?",["Add -s or -es","Change the vowel","Add -en"],0,"Regular plurals follow the usual rule: add -s or -es.","Think of dog → dogs."),
+so("Plural Word Detectives: sort each pair. Tap a pair, then tap a box.",["cat → cats","dog → dogs","book → books","child → children","tooth → teeth","mouse → mice","foot → feet","man → men"],["Regular","Irregular"],[0,0,0,1,1,1,1,1],"Cat, dog and book just add -s. Child, tooth, mouse, foot and man change in a different way."),
+mc("👩 lady → ?",["ladys","ladies","ladyes"],1,"Ladies: the word ends in a consonant + y, so we change y to i and add -es. This is a different pattern from child → children.","Look at the letter before the y."),
+mc("🐂 One ox, two ___.",["oxes","oxen","ox"],1,"Ox adds -en: oxen. Child → children is another -en type word.","Which one is a special word?"),
+mc("🐑 One sheep, two ___.",["sheeps","sheepes","sheep"],2,"Sheep stays the same in singular and plural. Deer and fish do too.","Some words stay the same."),
+mc("Which sentence is correct? 🐭",["Two mouses ran away.","Two mice ran away.","Two mouse ran away."],1,"Mouse changes its vowel: mice. Foot → feet and goose → geese change the vowel too.","Say it aloud. Which sounds right?"),
+mc("Build a Plural Place 🏞️ You drew 3 🦷 in your picture. Which label is right?",["3 tooths","3 teeth","3 teeths"],1,"Tooth → teeth (the vowel changes).","Remember the poster: tooth → ?"),
+mc("Think! Which sentence is correct? Furniture names a whole group of things.",["We bought new furnitures.","We bought new furniture.","We bought new furnitureses."],1,"Furniture is not normally made plural. We say some furniture.","Do we say one furniture, two furnitures?")]},
+{n:"Vocabulary World",em:"🕵️",c:"#e8890c",intro:"Welcome, Category Detective! Put things in groups that share something. Always give a reason!",q:[
+mc("🍎 🍌 🥭 🥕 Which one does NOT belong?",["apple","mango","carrot"],2,"Carrot: the others are fruits.","Which one is a vegetable?"),
+mc("🐶 🐱 🐮 🪑 Which does NOT belong?",["dog","chair","cow"],1,"Chair: the others are animals.","Which one is not alive?"),
+mc("✏️ 📕 📏 🥭 Which does NOT belong?",["ruler","book","mango"],2,"Mango: the others are school supplies.","Which one can you eat?"),
+so("Design a Supermarket 🛒 Put each item in the right section.",["apple","carrot","juice","soap","mango","milk","broom","cabbage"],["Fruits","Vegetables","Drinks","Cleaning"],[0,1,2,3,0,2,3,1],"Apple and mango are fruits, carrot and cabbage are vegetables, juice and milk are drinks, soap and broom are for cleaning."),
+mc("🚌 🚗 🚕 🚲 What is the best category name?",["Transportation","Fruits","Clothing"],0,"They all take people from place to place.","What do these do?"),
+mc("🌹 🥭 🐶 🥕 If the category is 'foods', which words do NOT belong?",["rose and dog","mango and carrot","only dog"],0,"Rose is a plant and dog is an animal, so both are not foods.","Which ones can you eat?"),
+od("Put the Detective Steps in order.",["LOOK","FIND A PATTERN","GROUP","CHECK","EXPLAIN"],"First LOOK, then FIND A PATTERN, GROUP, CHECK and EXPLAIN."),
+mc("🥭 🍌 🦁 🐶 Can these be sorted in a clear way?",["Yes: fruits and animals, if I explain my rule","No, they cannot be sorted","Only one group is allowed"],0,"Many groups can be sorted more than one way if you explain your rule.","Look for two groups.")]},
+{n:"Phonics World",em:"🍰",c:"#2b9c4e",intro:"Let us listen! The long /a/ sound says its name, like cake. We will also look at /l/ blends like bl, cl, fl, gl, pl and sl.",q:[
+mc("Which word has the LONG a sound? 🍰",["cat","cake","map"],1,"Cake says the name of the letter A. Cat and map have short /a/.","Does the A say its name?"),
+so("Sort by spelling pattern.",["apron","cake","rain","play","vase","train","tray","baby"],["a","a-e","ai","ay"],[0,1,2,3,1,2,3,0],"Apron and baby use a, cake and vase use a-e, rain and train use ai, play and tray use ay."),
+so("Where do you hear the long /a/? Initial, medial or final?",["apron","rain","play","ape","cake","day"],["Initial (start)","Medial (middle)","Final (end)"],[0,1,2,0,1,2],"Apron and ape start with it, rain and cake have it in the middle, play and day end with it."),
+mc("🔥 Which blend begins the word flame?",["bl","fl","gl"],1,"Flame starts with fl. You hear both f and l.","Say the first two sounds."),
+mc("blade: which shows the blend and the long /a/ pattern?",["bl + a-e","cl + ai","pl + ay"],0,"Blade = bl + a-e.","Look at the start and the end."),
+mc("Complete the word: t r _ _ n 🚆",["ai","ay","a-e"],0,"Train uses ai.","Rain and train share a pattern."),
+mc("🌧️ Which sentence has TWO long /a/ words?",["The cat sat on a mat.","The train came in the rain.","The dog ran fast."],1,"Train and rain both have long /a/ with ai.","Look for ai."),
+mc("Read the poem. Which word ends with the long /a/ pattern ay?",["rain","day","ape"],1,"Day ends with ay. Rain uses ai and ape uses a-e.","Look at the end of each word.","A little ape sat in a tree. He saw the rain come down all day, so he stayed inside and chose to play.")]},
+{n:"Comprehension World",em:"🐶",c:"#2c7be5",intro:"Let us retell stories! A good retelling uses your own words and tells the important events in the right order: Beginning, Middle, End.",q:[
+mc("What does retell mean?",["Tell a story again in your own words","Copy it word for word","Draw a map"],0,"Retelling means telling a story again in your own words with the important events.","Think about your own words."),
+mc("Which is NOT a way to retell a story?",["Role-play","Using pictures","Ignoring the story"],2,"We can retell by speaking, writing, pictures, sequencing, role-play and story maps.","One of them is not helpful."),
+mc("Where did Sam see the puppy?",["Near a tree","In a shop","At the beach"],0,"Sam saw the puppy near a tree.","Look for the word tree.",PUP),
+mc("Why did Sam check the collar?",["To find the puppy's name or owner","To make it walk","To take a photo"],0,"He wanted to find out who owned the puppy.","Think about the problem.",PUP),
+od("Put the story events in order.",["Sam found a lost puppy.","He asked the neighbours for help.","A little girl came looking for her puppy.","Sam returned the puppy to her."],"The events happen in this order: find, ask, girl arrives, return.",PUP),
+so("Beginning, Middle or End?",["Sam finds a puppy near a tree","Sam asks the neighbours","The girl thanks Sam","Sam checks the collar"],["Beginning","Middle","End"],[0,1,2,1],"The beginning shows what happens first. The middle has the problem and events. The end has the solution."),
+mc("___, a girl came for the puppy. Pick the sequencing word.",["Finally","First","Next"],0,"Finally goes near the end. The others are First, Next, Then, After that, Finally.","Which word comes last?"),
+wr("Retell The Lost Puppy in your own words. Use First, Next, Then and Finally.","First, Sam found a lost puppy. Next, he checked its collar. Then he asked the neighbours for help. Finally, a little girl came and Sam returned the puppy to her.",["I used First, Next, Then, Finally","I used my own words","I told the events in order"],PUP)]},
+{n:"Listening and Speaking World",em:"🚦",c:"#8a4fd6",intro:"Practical rules help us stay safe and get along with others. Rules are not the same everywhere, because each place has a different purpose.",q:[
+mc("What is a practical rule?",["A simple everyday rule that helps us stay safe and get along","A kind of game","A type of homework"],0,"A practical rule helps us stay safe and get along with others.","Think about why we have rules."),
+so("Rules Relay: which setting does each rule belong to?",["Raise your hand before speaking","Ask permission before going outside","Look both ways before crossing","Whisper in the library","Walk in the corridor","Wait your turn to speak at the table"],["School","Home","Community"],[0,1,2,2,0,1],"School: raise your hand, walk in the corridor. Home: ask permission, wait your turn. Community: look both ways, whisper in the library."),
+mc("Traffic-light game 🔴 RED. What do you do?",["Stop and be silent","Talk loudly","Run"],0,"Red means stop and be silent.","What does red mean on the road?"),
+mc("Traffic-light game 🟡 YELLOW. What do you do?",["Get ready","Shout","Stop and be silent"],0,"Yellow means get ready.","Not stop yet, not go yet."),
+mc("⛪ You are in church. What is the respectful choice?",["Sit quietly and listen","Run around","Play loud music"],0,"In church we sit quietly and listen.","Other people are listening."),
+mc("Why do we look both ways before we cross the road? 🚗",["To stay safe from cars","To play a game","Because it looks nice"],0,"Looking both ways helps keep us safe.","Think about cars."),
+mc("Why are rules different at school, at home and in the community?",["Each place has a different purpose","Adults like to change them","They are the same everywhere"],0,"Each setting has a different purpose, so the rules fit that place.","Think about the library and the playground."),
+wr("Complete the sentence in full: At school we ___, but at home we ___.","At school we raise our hand before speaking, but at home we ask permission before going outside.",["I wrote a complete sentence","I named one school rule and one home rule","I started with a capital letter and ended with a full stop"])]},
+{n:"Writing World",em:"🐷",c:"#d6336c",intro:"Writers use a Venn diagram to compare two stories. Left circle: only Story 1. Right circle: only Story 2. Middle: both stories!",q:[
+mc("Which part of a Venn diagram holds details found in BOTH stories?",["Left circle","Middle, where the circles overlap","Right circle"],1,"The overlap holds what is the same in both.","Both means shared."),
+so("Venn Diagram: place each detail. 🐷 The Three Little Pigs vs 👧 Little Red Riding Hood",["Three pig characters","A girl visits her grandmother","A wolf is the villain","Part of the story is in a forest","The pigs build houses","The wolf dresses as the grandmother","Both teach a lesson"],["Three Little Pigs only","Both stories","Little Red Riding Hood only"],[0,2,1,1,0,2,1],"Pigs and houses belong only to the pigs' story. The girl and grandmother belong only to Red Riding Hood. The wolf villain, the forest and the lesson are in both."),
+mc("Which is a SIMILARITY?",["A wolf is the villain in both stories","The pigs build houses","A girl visits her grandmother"],0,"A wolf is the villain in both stories.","Which one is true for both?"),
+mc("Which is a DIFFERENCE?",["Both stories have a wolf","The pigs build houses but Red Riding Hood visits her grandmother","Both teach a lesson"],1,"One story is about building houses and the other about a visit.","Which shows something different?"),
+mc("Why does 'The wolf dresses as the grandmother' go in the Red Riding Hood circle only?",["It only happens in that story","It happens in both stories","It is not in any story"],0,"Only Little Red Riding Hood has a wolf who dresses as the grandmother.","Does it happen in the pigs' story?"),
+wr("Write one similarity and one difference between the two stories in complete sentences.","One similarity is that a wolf is the villain in both stories. One difference is that the pigs build houses, but Little Red Riding Hood visits her grandmother.",["I wrote one similarity","I wrote one difference","I used complete sentences"]),
+wr("Challenge: use your diagram to plan your own story. Name a character, a setting and a problem.","Character: Zara the goat. Setting: a forest near a river. Problem: a fox tries to trick her.",["I named a character","I named a setting","I named a problem"])]}
+];
+let S={lv:1,sc:{},dn:{},wr:[],fin:0};
+try{Object.assign(S,JSON.parse(localStorage.getItem("g3la")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("g3la",JSON.stringify(S))}catch(e){}};
+const LV=["Support","On Level","Challenge"];
+/* ---------- Read aloud ---------- */
+const ss=window.speechSynthesis;let gen=0,cur=null,voices=[];
+const spk=t=>t.replace(/[\u2190-\u2BFF\uD800-\uDFFF]/g," ").replace(/_/g," ");
+function prep(el){if(el._s)return;const text=el.textContent;el.textContent="";el._s=[];
+ (text.match(/[^.!?]+[.!?]*\s*/g)||[text]).forEach(t=>{const sp=document.createElement("span");sp.className="s";const seg={t:spk(t),sp,w:[]};let last=0,m;const re=/[A-Za-z0-9'’-]+/g;
+  while((m=re.exec(t))){if(m.index>last)sp.append(t.slice(last,m.index));const w=document.createElement("span");w.className="w1";w.textContent=m[0];sp.append(w);seg.w.push({el:w,a:m.index,b:m.index+m[0].length});last=m.index+m[0].length}
+  sp.append(t.slice(last));sp.title="Click to hear this sentence again";sp.onclick=()=>read([seg]);el.append(sp);el._s.push(seg)})}
+const clr=()=>document.querySelectorAll(".on").forEach(x=>x.classList.remove("on"));
+function read(segs){if(!ss){return}stop();if(!segs.length)return;cur={segs,i:0,g:gen,b:false};say()}
+function say(){const c=cur;if(!c||c.g!==gen)return;const s=c.segs[c.i];if(!s){stop();return}clr();s.sp.classList.add("on");s.sp.scrollIntoView({block:"nearest",behavior:"smooth"});
+ const u=new SpeechSynthesisUtterance(s.t),g=gen;u.rate=+$("#rate").value;const v=voices.find(x=>x.name===$("#voice").value);if(v){u.voice=v;u.lang=v.lang}else u.lang="en-US";
+ u.onboundary=e=>{if(g!==gen||(e.name&&e.name!=="word"))return;const w=s.w.find(x=>e.charIndex>=x.a&&e.charIndex<x.b)||s.w.find(x=>x.a>=e.charIndex);if(!w)return;c.b=true;s.w.forEach(x=>x.el.classList.remove("on"));w.el.classList.add("on");w.el.scrollIntoView({block:"nearest",behavior:"smooth"})};
+ u.onend=()=>{if(g!==gen)return;if(!c.b&&c.i==0)$("#st").textContent="This voice cannot highlight word by word, so whole sentences are highlighted.";c.i++;say()};
+ u.onerror=e=>{if(g!==gen||e.error==="interrupted"||e.error==="canceled")return;stop();$("#st").textContent="Sorry, the voice stopped. Try again or pick another voice."};
+ ss.speak(u)}
+function stop(){gen++;if(ss)ss.cancel();clr();cur=null}
+function loadV(){if(!ss)return;voices=ss.getVoices().filter(v=>/^en/i.test(v.lang));const sel=$("#voice"),old=sel.value;sel.innerHTML=voices.map(v=>`<option>${v.name}</option>`).join("");
+ const best=voices.find(v=>/natural|google|samantha|aria|jenny/i.test(v.name))||voices[0];if(old&&voices.some(v=>v.name===old))sel.value=old;else if(best)sel.value=best.name}
+if(ss){loadV();ss.onvoiceschanged=loadV}else{$("#rb").innerHTML="Read Aloud is not available in this browser. You can still play and read!"}
+const allSegs=()=>[...document.querySelectorAll(".rd")].flatMap(e=>(prep(e),e._s));
+$("#rp").onclick=()=>read(allSegs());$("#rs").onclick=stop;$("#rpa").onclick=()=>ss&&ss.pause();$("#rr").onclick=()=>ss&&ss.resume();
+$("#rx").onclick=()=>{const c=cur;read(c?c.segs:allSegs())};
+/* ---------- Game ---------- */
+let Q;const app=$("#app");
+const tot=w=>W[w].q.length,dn=w=>W[w].q.filter((_,i)=>S.dn[w+"-"+i]).length;
+function home(){stop();Q=null;const stars=Object.keys(S.dn).length;
+ app.innerHTML=`<h1>🌟 Grade 3 Language Arts Adventure: Learn, Play and Win! 🌟</h1>
+ <div class="card"><p class="rd">Pick a learning world. Tap Read to hear the words, or tap any sentence to hear it again.</p>
+ <div class="lv" role="group" aria-label="Difficulty">Level: ${LV.map((l,i)=>`<button data-l="${i}" aria-pressed="${S.lv==i}">${l}</button>`).join("")}</div>
+ <p>⭐ ${stars} stars &nbsp; 🏅 ${W.filter((_,i)=>dn(i)==tot(i)).length} badges &nbsp; 🎯 ${Object.values(S.sc).reduce((a,b)=>a+b,0)} points</p></div>
+ <div class="grid">${W.map((w,i)=>`<button class="w" style="--c:${w.c}" data-w="${i}"><span class="em">${w.em}</span><b>${w.n}</b><br>${dn(i)==tot(i)?"🏅 ":""}${dn(i)}/${tot(i)} done · ${S.sc[i]||0} pts<div class="bar"><i style="width:${100*dn(i)/tot(i)}%"></i></div></button>`).join("")}</div>
+ <div class="card"><button id="fin">🏆 Final Mixed Challenge${S.fin?" (best "+S.fin+")":""}</button><button id="rev">🔍 Review mistakes (${S.wr.length})</button><button id="rst">🗑 Reset progress</button></div>
+ <p><small>Lesson content is from the teacher's plan. Extra practice questions and examples were added to match the lesson objectives.</small></p>`;
+ app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{S.lv=+b.dataset.l;save();home()});
+ app.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>intro(+b.dataset.w));
+ $("#fin").onclick=()=>{const l=[];W.forEach((w,wi)=>sh(w.q.map((q,i)=>({w:wi,i,q})).filter(x=>x.q.t!="wr")).slice(0,2).forEach(x=>l.push(x)));start(sh(l),"Final Mixed Challenge",true)};
+ $("#rev").onclick=review;
+ $("#rst").onclick=()=>{if(confirm("Reset all stars, points and progress?")){S={lv:S.lv,sc:{},dn:{},wr:[],fin:0};save();home()}}}
+function intro(w){stop();const d=W[w];app.innerHTML=`<div class="card" style="--c:${d.c}"><button id="bk">⬅ Home</button><h1><span class="em">${d.em}</span>${d.n}</h1><p class="rd">${d.intro}</p><button id="go">Let's play! 🚀</button></div>`;
+ $("#bk").onclick=home;$("#go").onclick=()=>start(d.q.map((q,i)=>({w,i,q})),d.n)}
+function start(list,title,fin){Q={list,i:0,title,fin,pts:0,ok:0};ask()}
+function ask(){stop();const x=Q.list[Q.i],d=x.q,c=W[x.w].c;Q.tries=0;Q.sel=null;Q.od=[];Q.pl={};Q.done=false;
+ app.innerHTML=`<div class="card" style="--c:${c}"><button id="bk">⬅ Home</button> ${Q.title} · Question ${Q.i+1}/${Q.list.length} · ${Q.pts} pts · Level: ${LV[S.lv]}
+ ${d.s?`<p class="rd story">${d.s}</p>`:""}<p class="rd q">${d.p}</p><div id="body"></div><div id="fb" class="fb" role="status" aria-live="polite"></div>
+ <button id="hint" ${S.lv==2?"hidden":""}>💡 Hint</button><button id="nx" hidden>Next ➜</button></div>`;
+ $("#bk").onclick=home;$("#hint").onclick=()=>fb("💡 "+(d.h||"Say each word aloud and look for the pattern."),"");$("#nx").onclick=next;
+ if(S.lv==0&&d.h)fb("💡 "+d.h,"");
+ ({mc:rMc,so:rSo,od:rOd,wr:rWr})[d.t](d,x)}
+function fb(t,k){const f=$("#fb");f.className="fb "+k;f.textContent=t}
+function good(x){Q.done=true;const p=Q.tries?5:10;Q.pts+=p;Q.ok++;S.sc[x.w]=(S.sc[x.w]||0)+p;S.dn[x.w+"-"+x.i]=1;S.wr=S.wr.filter(r=>!(r.w==x.w&&r.i==x.i));
+ fb("✔ Well done! +"+p+" points. "+x.q.e,"ok");fin()}
+function bad(x,reveal){Q.tries++;if(Q.tries<2&&!reveal){fb("✖ Not quite. Good try! Use the hint and try again. Mistakes help us learn.","no");return false}
+ Q.done=true;S.dn[x.w+"-"+x.i]=1;if(!S.wr.some(r=>r.w==x.w&&r.i==x.i))S.wr.push({w:x.w,i:x.i});fb("✖ Let us learn from this. "+x.q.e+" (+0 points, but you finished it!)","no");fin();return true}
+function fin(){save();$("#nx").hidden=false;$("#nx").focus();document.querySelectorAll("#body button").forEach(b=>b.disabled=true)}
+function next(){Q.i++;if(Q.i<Q.list.length)return ask();stop();const all=Q.ok,n=Q.list.length;if(Q.fin&&Q.pts>(S.fin||0))S.fin=Q.pts;save();
+ const strong=[...new Set(Q.list.filter(x=>!S.wr.some(r=>r.w==x.w&&r.i==x.i)).map(x=>W[x.w].n))];
+ app.innerHTML=`<div class="card"><h1>🎉 ${Q.title} complete!</h1><p class="q">You scored ${Q.pts} points and got ${all} of ${n} right.${all==n?" 🏅 Perfect!":" ⭐ Great effort!"}</p><p>Strengths: ${strong.join(", ")||"Keep practising — you are improving!"}</p><button id="h">🏠 Home</button><button id="rv">🔍 Review mistakes</button></div>`;
+ $("#h").onclick=home;$("#rv").onclick=review}
+function review(){stop();app.innerHTML=`<div class="card"><button id="h">⬅ Home</button><h1>🔍 Review</h1>${S.wr.length?S.wr.map(r=>`<div class="card" style="--c:${W[r.w].c}"><b>${W[r.w].n}</b><p>${W[r.w].q[r.i].p}</p><p>✔ ${W[r.w].q[r.i].e}</p></div>`).join(""):"<p>No mistakes to review. Fantastic! 🌟</p>"}</div>`;$("#h").onclick=home}
+function rMc(d,x){let o=d.o.map((t,i)=>({t,c:i==d.a}));if(S.lv==0){const k=o.find(z=>z.c),w=sh(o.filter(z=>!z.c))[0];o=[k,w]}o=sh(o);
+ $("#body").innerHTML=o.map((z,i)=>`<button class="opt" data-i="${i}">${"ABC"[i]}. ${z.t}</button>`).join("");
+ $("#body").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const z=o[b.dataset.i];if(z.c){b.textContent+=" ✔";good(x)}else{b.textContent+=" ✖";b.disabled=true;if(bad(x)){document.querySelectorAll(".opt").forEach((e,i)=>{if(o[i].c)e.textContent+=" ✔ (correct)"})}}})}
+function rSo(d,x){const items=sh(d.i.map((t,i)=>({t,i})));const bk=d.b;
+ const draw=()=>{$("#body").innerHTML=`<div>${items.filter(z=>Q.pl[z.i]==null).map(z=>`<button class="chip ${Q.sel==z.i?"sel":""}" data-i="${z.i}">${z.t}</button>`).join("")||"All placed! Press Check."}</div>${bk.map((b,bi)=>`<div class="bk"><b>${b}</b>${items.filter(z=>Q.pl[z.i]===bi).map(z=>`<button class="chip" data-r="${z.i}" title="Tap to take back">${z.t}</button>`).join("")}<button data-b="${bi}">⤵ Put here</button></div>`).join("")}<button id="ck">Check ✔</button>`;
+  $("#body").querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{Q.sel=+b.dataset.i;draw()});
+  $("#body").querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{delete Q.pl[b.dataset.r];draw()});
+  $("#body").querySelectorAll("[data-b]").forEach(b=>b.onclick=()=>{if(Q.sel!=null){Q.pl[Q.sel]=+b.dataset.b;Q.sel=null;draw()}});
+  $("#ck").onclick=()=>{if(Object.keys(Q.pl).length<d.i.length){fb("Place every item first. 🙂","no");return}const wrong=d.i.filter((_,i)=>Q.pl[i]!=d.a[i]);
+   if(!wrong.length)good(x);else{wrong.forEach(w=>delete Q.pl[d.i.indexOf(w)]);const cnt=d.i.length-wrong.length;if(bad(x)){d.i.forEach((_,i)=>Q.pl[i]=d.a[i])}else fb(`✖ ${cnt} of ${d.i.length} are right. The others went back. Try again!`,"no");draw();if(Q.done)fin()}}};draw()}
+function rOd(d,x){const items=sh(d.i.map((t,i)=>({t,i})));
+ const draw=()=>{$("#body").innerHTML=`<p>Tap in order, first to last:</p><ol>${Q.od.map(i=>`<li>${d.i[i]}</li>`).join("")}</ol>${items.filter(z=>!Q.od.includes(z.i)).map(z=>`<button class="chip" data-i="${z.i}">${z.t}</button>`).join("")}<button id="un">↩ Undo</button>`;
+  $("#body").querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{Q.od.push(+b.dataset.i);if(Q.od.length<d.i.length)return draw();draw();if(Q.od.every((v,k)=>v==k))good(x);else{Q.od=[];if(bad(x)){Q.od=d.i.map((_,k)=>k)}draw();if(Q.done)fin()}});
+  $("#un").onclick=()=>{Q.od.pop();draw()}};draw()}
+function rWr(d,x){$("#body").innerHTML=`<textarea aria-label="Your answer"></textarea><button id="sm">See model answer</button><div id="mo"></div>`;
+ $("#sm").onclick=()=>{$("#sm").hidden=true;$("#mo").innerHTML=`<div class="card"><p class="rd"><b>Model answer:</b> ${d.m}</p><p>Check your work (the game cannot grade writing, so you check it yourself):</p>${d.c.map((c,i)=>`<label><input type="checkbox" class="ck"> ${c}</label><br>`).join("")}<button id="dn">I checked my work ✔</button></div>`;
+  $("#dn").onclick=()=>{x.q.e="Great job comparing your writing with the model.";good(x)}}}
+home();
+</script></body></html>
