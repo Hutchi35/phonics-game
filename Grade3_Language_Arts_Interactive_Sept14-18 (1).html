@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 3 Language Arts: My Body III – Interactive Activity</title>
+<style>
+:root{--g:#1b5e4b;--y:#ffd23f;--c:#ff6b4a;--bg:#e9f5ff;--ink:#16302b;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:20px/1.5 'Comic Sans MS','Chalkboard SE','Trebuchet MS',system-ui,sans-serif;padding-bottom:110px}
+header{background:var(--g);color:#fff;padding:14px 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{margin:0;font-size:1.25rem;color:var(--y)}
+main{max-width:980px;margin:0 auto;padding:16px}
+h2{font-size:1.9rem;margin:.4em 0 0}h3{margin:.2em 0 .4em;font-size:1.3rem}h4{margin:.2em 0}
+.card{background:#fff;border:3px solid var(--g);border-radius:20px;padding:14px 16px;margin:14px 0}
+button,select{font:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid var(--c);outline-offset:2px}
+.sm,#bar button{background:var(--y);color:var(--ink);border:3px solid var(--g);border-radius:14px;padding:6px 12px;margin:3px}
+.sm:hover,#bar button:hover{background:#ffe680}
+.sp{background:#d8f0ff;border:2px solid var(--g);border-radius:50%;width:42px;height:42px;flex:none;font-size:1.1rem}
+.rd{display:flex;gap:10px;align-items:flex-start;margin:6px 0}.big .tx{font-size:1.2em}
+.w{border-radius:6px;padding:0 1px}.tap .w{cursor:pointer;border-bottom:2px dotted #3a8}.tap .lc:not(section){cursor:pointer}.w.on{background:#ffe14d;outline:3px solid var(--c);font-weight:bold}
+.goal{background:#fff4c2;border:3px dashed var(--g);border-radius:16px;padding:10px 14px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.mc{background:#fff;border:4px solid var(--g);border-radius:22px;padding:14px;text-align:left;width:100%}
+.mc .ic{font-size:2.6rem}.mc:hover{background:#fff4c2}.bar{height:12px;background:#dcefe9;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c)}
+.pool,.bk,.ops{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip,.op{background:#fff4c2;border:3px solid var(--g);border-radius:14px;padding:6px 12px;color:var(--ink)}
+.chip.sel{background:var(--y);outline:3px solid var(--c)}.chip.ok,.op.ok{background:#c8f2c8}.op.no{background:#eee;color:#777}.chip:disabled,.op:disabled{cursor:default;color:var(--ink)}.op.no:disabled{color:#777}
+.binw{flex:1 1 200px;border:3px solid var(--g);border-radius:16px;background:#f2fbf8;min-height:90px;padding:6px}
+.bh{width:100%;background:var(--g);color:#fff;border:0;border-radius:10px;padding:6px}.in{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.fb{min-height:1.5em;font-weight:bold;margin:6px 0}.hint{display:block;color:#6a3d00}
+.built{display:flex;flex-wrap:wrap;gap:6px;padding-left:24px}.built.inl{list-style:none;padding:0}.built.inl li:not(:last-child)::after{content:'-';margin-left:6px}
+.row{border-top:2px dotted #9bc;padding:8px 0}.big2{font-size:2.2rem}
+input,textarea{font:inherit;width:100%;max-width:560px;border:3px solid var(--g);border-radius:12px;padding:6px 10px}
+.ff.no{color:#a33}.ff.ok2{color:#0a6b2c}.ff{margin:2px 0 6px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.sc{border:3px solid var(--g);border-radius:16px;padding:8px;text-align:center}.syl{font-size:1.7rem;display:block}.syl i{color:var(--c);font-style:normal;padding:0 2px}.p{border-radius:8px;padding:0 3px}.p.on{background:#ffe14d;outline:3px solid var(--c)}
+.sum{background:#fff4c2;border-radius:14px;padding:10px;margin:8px 0}.qb{border-top:2px dotted #9bc;padding:8px 0}
+.bank{background:#eaffea;border-radius:12px;padding:6px 10px;margin:6px 0}
+table{border-collapse:collapse;width:100%}td,th{border:2px solid var(--g);padding:6px;text-align:left}
+#bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:4px solid var(--g);padding:6px 10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px;z-index:5;font-size:.9rem}
+#bar select{font-size:.9rem}#sm{flex-basis:100%;color:#6a3d00}
+@media(max-width:600px){body{font-size:18px}}
+@media(prefers-reduced-motion:no-preference){.w.on{transition:background .1s}}
+</style>
+</head>
+<body>
+<header><h1>📚 Grade 3 Language Arts: My Body III</h1>
+<label>My level: <select id="lv"><option value="sup">⭐ Extra support</option><option value="std" selected>⭐⭐ At grade level</option><option value="ext">⭐⭐⭐ Extension</option></select></label></header>
+<main id="app"></main>
+<div id="bar" role="toolbar" aria-label="Read aloud controls">
+<button id="bPlay">▶ Read the notes</button><button id="bPause">⏸ Pause</button><button id="bRes">⏯ Resume</button><button id="bStop">⏹ Stop</button><button id="bRep">↻ Replay</button>
+<label>Speed <select id="rate"><option value=".6">Slow</option><option value=".8" selected>Steady</option><option value="1">Normal</option></select></label>
+<label><input type="checkbox" id="afb" style="width:auto"> Read feedback aloud</label><span id="sm" aria-live="polite"></span></div>
+<script>
+const $=s=>document.querySelector(s),sh=a=>[...a].sort(()=>Math.random()-.5),esc=s=>String(s).replace(/"/g,'&quot;');
+let lv='std',cur=null,S={q:{},p:{}};const ACT={},ST={};
+const Q=(q,a,w,e,s)=>({q,a,w,e,s});
+const N=(w,n,d)=>Q('How many syllables are in this word? Listen and clap.',''+n,['1','2','3','4'].filter(x=>x!=n).slice(0,2),`${d} has ${n} syllable${n>1?'s':''}.`,w);
+const D=(w,r,x)=>Q(`Which is the correct way to divide ${w}?`,r,x,`${r}: each part has one vowel sound.`,w);
+const LA='ape|apron|april|baby|paper|tomato|whale|rain|train|sail|paint|mail|snail|tray|hay|play|cake|vase|plane|day|today|say|stay|pray|away|table|lady|maple|wait|paid|tail|game|name|make|came|gate|lake|bake|baker|space|face|race|late|safe|chain|brain|may|gray|clay|spray|data|radio';
+const EM={cake:'🍰',cat:'🐱',hat:'🎩',sand:'🏖️',map:'🗺️',snail:'🐌',man:'👨',train:'🚆',apple:'🍎',table:'🪑',paper:'📄',tray:'🍽️',hay:'🌾',play:'⚽',mail:'📬',rain:'🌧️',tomato:'🍅',radio:'📻',rainbow:'🌈',baby:'👶',vacation:'🏖️',sailboat:'⛵',babysitter:'🧸',ape:'🦍',apron:'👩‍🍳',lion:'🦁',zebra:'🦓',mango:'🥭',pig:'🐖',monkey:'🐒',carrot:'🥕',cherry:'🍒',dog:'🐕',children:'🧒',classroom:'🏫'};
+const SY=[['cake'],['rain'],['play'],['ba','by'],['ta','ble'],['rain','bow'],['to','ma','to'],['ra','di','o'],['va','ca','tion'],['ba','by','sit','ter']];
+const M=[
+{id:'nn',ic:'🏘️',st:'Grammar',n:'Common and Proper Nouns',g:'I can tell common nouns from proper nouns and use capital letters for proper nouns.',
+L:[['What is a noun?','A noun is a word that names a person, an animal, a place or a thing. Common nouns are ordinary, general names, like girl, school and dog. Proper nouns are special names, like Ramona, Jamaica and Bingo. Proper nouns are so special that they always begin with a capital letter.']],
+A:[{k:'sort',id:'nn1',t:'Common or Proper? Be a noun detective!',c:['Common nouns','Proper nouns'],w:['Common nouns are general names.','Proper nouns are special names with capital letters.'],
+i:[['girl',0,'👧'],['Ramona',1,'👧'],['school',0,'🏫'],['Excelsior Primary and Infant',1,'🏫'],['teacher',0,'🧑‍🏫'],['Miss Brown',1,'🧑‍🏫'],['country',0,'🗺️'],['Jamaica',1,'🇯🇲'],['dog',0,'🐕'],['Bingo',1,'🐕'],['river',0,'🏞️'],['Dunn’s River',1,'🏞️']]},
+{k:'sort',id:'nn2',t:'Is it a person, place, animal or thing?',c:['People','Places','Animals','Things'],i:[['Kayla',0,'👧'],['Portland',1,'🗺️'],['monkey',2,'🐒'],['kite',3,'🪁'],['Sam',0,'👦'],['Burger King',1,'🍔'],['lion',2,'🦁'],['cake',3,'🍰'],['Mr. Holness',0,'🧑'],['Mona Prep',1,'🏫'],['rabbit',2,'🐇'],['patty',3,'🥟']]},
+{k:'mc',id:'nn3',t:'Find the proper noun in the sentence',q:[Q('Mary and Mark are my friends. Which word is a proper noun?','Mary',['friends','are'],'Mary is the special name of a person, so it starts with a capital letter.'),Q('I live in Kingston with my parents. Which word is a proper noun?','Kingston',['live','parents'],'Kingston is the special name of a place.'),Q('My family eats ham at Christmas. Which word is a proper noun?','Christmas',['family','ham'],'Christmas is a special name, so it has a capital letter.'),Q('I have a Samsung phone. Which word is a proper noun?','Samsung',['phone','have'],'Samsung is the special name of a company, so it has a capital letter.')]},
+{k:'rows',id:'nn4',t:'Design our Noun Town (digital)',x:'Give each common noun in your town a special proper name. Remember the capital letter!',r:[['🧒','person'],['🏫','place'],['🐕','animal'],['🚗','thing']].map(a=>({e:a[0],l:'A '+a[1]+' in my town',f:[{p:'Common noun (small letter)',low:1,h:'Example: girl'},{p:'Proper noun (Capital letter)',cap:1,h:'Example: Aaliyah'}]}))}],
+Z:[Q('Which is a proper noun?','Papine Market',['market','book'],'Papine Market is a special name, so it begins with capital letters.'),Q('A noun is a word that names…','a person, animal, place or thing',['an action','a colour only'],'Nouns name people, animals, places and things.'),Q('What is the common noun for Bingo?','dog',['Polly','Dunn’s River'],'Bingo is the special name of a dog. Dog is the general name.'),Q('Which is written correctly?','Jamaica',['jamaica','jAmaica'],'Proper nouns always start with a capital letter.'),Q('Why does Miss Brown start with capital letters?','It is a special name',['It is a common noun','It is a thing'],'Special names (proper nouns) always begin with capital letters.')],
+X:[{k:'rows',id:'nn5',t:'Extension: explain it',r:[{l:'In your own words',f:[{p:'Explain the difference between common and proper nouns.',ta:1,sent:1}]}]}]},
+{id:'cl',ic:'🧺',st:'Vocabulary',n:'Classification',g:'I can sort words and things into groups and say why they belong together.',
+L:[['What is classification?','Classification means sorting things into groups. We put things that are alike together. We look for something they share. Cat, dog, cow and horse are all animals. Sunday, Wednesday and Friday are all days.']],
+A:[{k:'sort',id:'cl1',t:'Write each word under the correct heading',c:['Fruits','Vegetables','Animals','Numbers'],i:[['cow',2,'🐄'],['pineapple',0,'🍍'],['broccoli',1,'🥦'],['one',3,'1️⃣'],['elephant',2,'🐘'],['strawberry',0,'🍓'],['callaloo',1,'🥬'],['fifteen',3],['monkey',2,'🐒'],['grapes',0,'🍇'],['twenty',3],['lettuce',1,'🥬']]},
+{k:'mc',id:'cl2',t:'Which one does not belong?',q:[Q('red, children, blue, brown','children',['red','blue'],'Red, blue and brown are colours.'),Q('dentist, fireman, classroom, soldier','classroom',['dentist','soldier'],'The others are people with jobs. A classroom is a place.'),Q('apple, carrot, cherry, mango','carrot',['apple','mango'],'The others are fruits. A carrot is a vegetable.'),Q('pig, rat, mat, monkey','mat',['pig','monkey'],'The others are animals. A mat is a thing.')]},
+{k:'mc',id:'cl3',t:'What do they share?',q:[Q('incisors, canines, premolars, molars','teeth',['fruits','months'],'These are all kinds of teeth.'),Q('wife, daughter, grandmother, niece','family members',['animals','shapes'],'These are all people in a family.'),Q('May, March, June, April','months',['days','colours'],'These are all months of the year.'),Q('circle, rectangle, triangle, square','shapes',['numbers','fruits'],'These are all shapes.'),Q('Orange is to fruit as cabbage is to…','vegetable',['animal','number'],'An orange is a fruit. A cabbage is a vegetable.'),Q('Television is to appliance as bed is to…','furniture',['fruit','month'],'A television is an appliance. A bed is furniture.')]},
+{k:'sort',id:'cl4',t:'Build a Classification Garden: sort the objects',c:['Animals','Plants','Food','School items'],i:[['dog',0,'🐕'],['tree',1,'🌳'],['bread',2,'🍞'],['pencil',3,'✏️'],['bird',0,'🐦'],['flower',1,'🌺'],['mango',2,'🥭'],['book',3,'📚']]}],
+Z:[Q('Classification means…','sorting things into groups that are alike',['counting things','drawing things'],'We put things that share a feature together.'),Q('Cat, dog, cow, horse can be grouped as…','animals',['days','fruits'],'They are all animals.'),Q('Sunday, Wednesday, Friday can be grouped as…','days',['months','colours'],'They are all days of the week.'),Q('Which one does not belong? lion, tiger, apple, zebra','apple',['lion','zebra'],'The others are animals. An apple is a fruit.'),Q('Pineapple, grapes and strawberry are…','fruits',['vegetables','numbers'],'They are all fruits.')],
+X:[{k:'rows',id:'cl5',t:'Extension: make your own groups',r:[{l:'My groups',f:[{p:'Write 3 vegetables (use commas)',n:3},{p:'Write 3 appliances (use commas)',n:3}]}]}]},
+{id:'la',ic:'🚆',st:'Phonics',n:'The Long A Sound and Syllables',g:'I can hear and spell the long A sound, and clap, count and divide long A words into syllables.',
+L:[['The long A','The vowels are a, e, i, o and u. A long vowel says its own name. The long A says ay. We can spell the long A sound four ways: a as in baby, a-e as in cake, ai as in rain, and ay as in tray. The short A is different. It is the sound in cat.'],['What is a syllable?','A syllable is a word part with one vowel sound. Listen for the vowel sounds, not just the vowel letters. Rain has two vowel letters, but only one vowel sound, so it has one syllable. Clap once for each word part. Tomato has three claps: to, ma, to.']],
+A:[{k:'sort',id:'la1',t:'Which spelling makes the long A sound?',c:['a','a-e','ai','ay'],i:[['baby',0,'👶'],['cake',1,'🍰'],['rain',2,'🌧️'],['tray',3,'🍽️'],['apron',0,'👩‍🍳'],['vase',1,'🏺'],['train',2,'🚆'],['hay',3,'🌾'],['paper',0,'📄'],['plane',1,'✈️'],['snail',2,'🐌'],['play',3,'⚽']]},
+{k:'sort',id:'la2',t:'Where do you hear the long A?',c:['Beginning','Middle','End'],i:[['ape',0,'🦍'],['baking',1,'🥖'],['today',2,'📅'],['apron',0,'👩‍🍳'],['player',1,'🎮'],['hay',2,'🌾'],['rain',1,'🌧️'],['tray',2,'🍽️']]},
+{k:'mc',id:'la3',t:'Listen and choose',q:[Q('Which word has the long A sound? Listen.','cake',['cat','hat'],'Cake has the a-e pattern and says ay.','cake'),Q('Which word has the SHORT a, like cat?','apple',['table','paper'],'Apple has the short a. Table and paper have the long A.','apple'),Q('pl__ (to play). Which letters make the long A?','ay',['ai','ee'],'We spell play with ay.','play'),Q('m__l (a letter you post). Which letters?','ai',['ay','oo'],'We spell mail with ai.','mail')]},
+{k:'rows',id:'la4',t:'My Long A booklet (digital)',x:'Write a sentence about each picture. Use the picture word in your sentence.',b:['ape','cake','rain','train'],r:[['🦍','ape'],['🍰','cake'],['🌧️','rain'],['🚆','train']].map(a=>({e:a[0],l:a[1],f:[{p:'Write a sentence',re:'\\b'+a[1]+'\\b',m:'Use the word '+a[1]+' in your sentence.',h:'I hear long A in '+a[1]+'.'}]}))},
+{k:'rows',id:'la5',t:'Build a sentence with three long A words',r:[{l:'My sentence',f:[{p:'Write one sentence with 3 long A words',ta:1,list:LA,need:3,m:'Use at least 3 different long A words, such as rain, cake, play or train.',h:'The baby will play in the rain.'}]}]},
+{k:'hd',t:'🕵️ Syllable Detectives: Clap, Count and Divide!'},
+{k:'syl',id:'sy0',t:'Mini-lesson: listen, clap and divide',x:'Press Hear it, then Clap along. Each word part lights up as it is said. All of these words have the long A sound.'},
+{k:'mc',id:'sy1',t:'Clap and Count',q:[N('play',1,'play'),N('table',2,'ta-ble'),N('tomato',3,'to-ma-to'),N('babysitter',4,'ba-by-sit-ter')]},
+{k:'sort',id:'sy2',t:'Picture Match: match the picture to its syllable count',c:['1 syllable','2 syllables','3 syllables','4 syllables'],i:[['cake',0,'🍰'],['baby',1,'👶'],['tomato',2,'🍅'],['babysitter',3,'🧸'],['train',0,'🚆'],['rainbow',1,'🌈'],['radio',2,'📻'],['vacation',2,'🏖️']]},
+{k:'sort',id:'sy3',t:'Syllable Sorting Station',c:['1 syllable','2 syllables','3 syllables','4 syllables'],i:[['table',1],['rain',0],['vacation',2],['babysitter',3],['paper',1],['radio',2],['play',0],['radiator',3]]},
+{k:'mc',id:'sy4',t:'Divide the Word',q:[D('rainbow','rain-bow',['ra-inbow','rainb-ow']),D('table','ta-ble',['tab-le','t-able']),D('tomato','to-ma-to',['tom-a-to','toma-to']),D('vacation','va-ca-tion',['vac-a-tion','vaca-tion'])]},
+{k:'ord',id:'sy5',t:'Syllable Builder: tap the parts in order',i:['ba','by'],sp:1},{k:'ord',id:'sy6',t:'Syllable Builder 2',i:['to','ma','to'],sp:1},{k:'ord',id:'sy6b',t:'Syllable Builder 3',i:['va','ca','tion'],sp:1},
+{k:'mc',id:'sy7',t:'Syllable Detective Challenge',q:[N('sailboat',2,'sail-boat'),N('radio',3,'ra-di-o'),N('babysitter',4,'ba-by-sit-ter'),N('hay',1,'hay')]},
+{k:'rows',id:'sy8',t:'Final task: divide five words and count',r:[['table','ta-ble',2],['rainbow','rain-bow',2],['tomato','to-ma-to',3],['vacation','va-ca-tion',3],['babysitter','ba-by-sit-ter',4]].map(a=>({e:EM[a[0]],l:a[0],f:[{p:'Divide it with hyphens',d:a[1]},{p:'How many syllables?',re:'^'+a[2]+'$',m:'Clap the word again and count.'}]}))}],
+Z:[Q('Which word has the long A sound?','snail',['sand','map'],'Snail has ai and says ay.','snail'),Q('Which spelling pattern is in tray?','ay',['ai','a-e'],'Tray ends with ay.','tray'),Q('Where do you hear the long A in hay?','End',['Beginning','Middle'],'The ay is at the end of hay.','hay'),Q('The long A says…','its own name, ay',['ah, like in cat','ee'],'A long vowel says its name.'),Q('Which word does NOT have the long A?','man',['cake','train'],'Man has the short a.','man'),N('table',2,'ta-ble'),N('tomato',3,'to-ma-to'),D('vacation','va-ca-tion',['vac-a-tion','vaca-tion'])],
+X:[{k:'rows',id:'la6',t:'Extension: more long A words',r:[{l:'Challenge',f:[{p:'Think of 4 more long A words. Write each one in a sentence.',ta:1,sent:2}]}]},{k:'rows',id:'sy9',t:'Extension: syllables in my name and my words',r:[{l:'Explain',f:[{p:'How many syllables are in your name? Explain how you counted.',ta:1,sent:1}]},{l:'Sentence',f:[{p:'Write a sentence using two long A words. Say how many syllables each has.',ta:1,sent:1,list:LA,need:2,m:'Use two long A words, such as table or baby.'}]}]}]},
+{id:'rt',ic:'🦊',st:'Comprehension',n:'Ways of Retelling Stories',g:'I can retell a story in my own words using Tell it, Show it or Act it.',
+L:[['Retelling','Retelling means telling a story again in your own words. There are three ways. Tell it: say the story out loud. Show it: use pictures. Act it: pretend to be the characters. To help you, you can use story elements, beginning, middle and end, five fingers, or the five Ws: who, what, where, when and why.'],['Story 1: Two Mice','Mike and Moe were two mice. They lived in a little green house. Mike and Moe saw some cheese. "I want the cheese!" said Mike. "It’s mine!" said Moe. Mike and Moe yelled and yelled. "How about we split it?" said Moe. "Yes!" said Mike. They both had some cheese.'],['Story 2: New Friend','Lizzy was new at school. When it was time to play outside, she did not have a friend to play with. "I will just sit here by myself," said Lizzy sadly. Then Jake came over. "I’m Jake! You can play with me!" he said. Lizzy was so happy to have a new friend.']],
+A:[{k:'sort',id:'rt1',t:'Tell it, Show it or Act it?',c:['Tell it','Show it','Act it'],i:[['Say the story out loud',0,'🗣️'],['Use pictures to tell the story',1,'🖼️'],['Pretend to be a character',2,'🎭'],['Tell a story without pictures',0,'👂'],['Draw a story map',1,'🗺️'],['Role-play with a partner',2,'👫']]},
+{k:'ord',id:'rt2',t:'Two Mice: beginning, middle and end. Put the events in order.',i:['Mike and Moe saw some cheese.','Both mice wanted it and yelled.','Moe said, how about we split it?','They both had some cheese.']},
+{k:'sort',id:'rt3',t:'New Friend: find the story elements',c:['Characters','Setting','Problem','Solution'],i:[['Lizzy and Jake',0,'🧒'],['At school',1,'🏫'],['Lizzy had no friend to play with',2,'😢'],['Jake asked Lizzy to play',3,'🤝'],['Playtime outside',1,'🛝'],['Jake',0,'👦']]},
+{k:'rows',id:'rt4',t:'Retell New Friend with sentence starters',r:[{l:'My retelling',f:[{p:'First, …',re:'\\w{3}',h:'First, Lizzy was new at school.'},{p:'Next, …',re:'\\w{3}',h:'Next, Jake came over.'},{p:'At the end, …',re:'\\w{3}',h:'At the end, Lizzy was happy.'}]}]},
+{k:'info',id:'rt5',t:'Act it out!',x:'With a partner, act out Two Mice. Then use your five fingers to retell it to the class: characters, setting, problem, events, solution.'}],
+Z:[Q('Retelling means…','telling a story in your own words',['copying every word','drawing only'],'Retelling uses your own words.'),Q('Which way of retelling is Show it?','using pictures',['saying it out loud','acting it'],'Show it means using pictures.'),Q('In Two Mice, what was the problem?','both mice wanted the cheese',['it rained','they had no house'],'Mike and Moe both wanted the cheese.'),Q('Who are the characters in New Friend?','Lizzy and Jake',['Mike and Moe','Ramona and Bingo'],'Lizzy and Jake are in the story.'),Q('The five Ws are who, what, where, when and…','why',['which','whose'],'The five Ws end with why.')],
+X:[{k:'rows',id:'rt6',t:'Extension: my own story',r:[{l:'Your turn',f:[{p:'Retell Two Mice using the words first, next and at the end.',ta:1,sent:3}]}]}]},
+{id:'ru',ic:'👂',st:'Speaking and Listening',n:'Observing Rules',g:'I can name rules for good listening and good speaking and say why they matter.',
+L:[['Rules','A rule is a guide that helps us behave in a way that is safe, respectful and kind. Rules for listening: look at the speaker, sit still and be quiet, and listen with your ears open. Rules for speaking: raise your hand, wait your turn, and speak clearly so others can hear you. Rules can look a little different at school, at home and on the playground. They all keep us safe and show respect.']],
+A:[{k:'sort',id:'ru1',t:'Good choice or poor choice?',c:['Good choice','Poor choice'],i:[['Kayla looks at Miss Brown and sits still.',0,'👧'],['Sam shouts out while the teacher is talking.',1,'📢'],['Ramona raises her hand and waits her turn.',0,'🙋'],['Two friends talk while the teacher gives instructions.',1,'💬'],['A child listens when a parent is talking.',0,'👂'],['A child interrupts a friend on the playground.',1,'🛝']]},
+{k:'sort',id:'ru2',t:'Where does the rule belong?',c:['Classroom','Playground','Home'],i:[['Raise your hand',0,'🙋'],['Listen for the teacher’s whistle',1,'📣'],['Listen when a parent is talking',2,'🏠'],['Do not shout out',0,'🤫'],['Wait your turn to talk to a friend',1,'🛝'],['Say please and thank you',2,'🙏']]},
+{k:'sort',id:'ru3',t:'Listening rule or speaking rule?',c:['Listening rule','Speaking rule'],i:[['Look at the speaker',0,'👀'],['Raise your hand',1,'🙋'],['Sit still and be quiet',0,'🤫'],['Wait your turn',1,'⏳'],['Listen with your ears open',0,'👂'],['Speak clearly',1,'🗣️']]},
+{k:'rows',id:'ru4',t:'Join two ideas with the word and',x:'Write two sentences about rules. Use and in each one. Example: I look at the speaker and I sit still.',r:[{l:'My sentences',f:[{p:'Two sentences with and',ta:1,re:'\\band\\b',sent:2,m:'Use the word and, and write 2 sentences.',h:'I raise my hand and I wait my turn.'}]}]},
+{k:'info',id:'ru5',t:'Role-play',x:'With a partner, act one scene of good listening and one scene of poor listening. Your classmates show thumbs up or thumbs down and say why.'},
+{k:'rows',id:'ru6',t:'Exit ticket',r:[{e:'👂',l:'Listening',f:[{p:'Write one listening rule',re:'\\w{4}',h:'Look at the speaker.'}]},{e:'🗣️',l:'Speaking',f:[{p:'Write one speaking rule',re:'\\w{4}',h:'Raise your hand.'}]}]}],
+Z:[Q('A rule is…','a guide for safe, respectful and kind behaviour',['a game','a punishment'],'Rules help us behave safely and kindly.'),Q('Which is a good listening rule?','Look at the speaker',['Shout out','Talk to a friend'],'Good listeners look at the speaker.'),Q('Which is a speaking rule?','Wait your turn',['Sit still','Cover your ears'],'Speakers wait for their turn.'),Q('Sam shouts out in class. What should he do?','Raise his hand',['Shout louder','Walk away'],'We raise our hand and wait to be called.'),Q('Why do we need rules in different places?','To stay safe and show respect',['To be loud','To have fun only'],'Rules keep us safe and respectful everywhere.')],
+X:[{k:'rows',id:'ru7',t:'Extension: why do rules matter?',r:[{l:'Explain',f:[{p:'Explain why rules for listening and speaking matter at home or on the playground.',ta:1,sent:2}]}]}]},
+{id:'vn',ic:'🥭',st:'Writing',n:'Comparing Ideas with a Venn Diagram',g:'I can use a Venn diagram to show how two things are alike and different, then write about it.',
+L:[['The Venn diagram','A Venn diagram has two circles that overlap. Each circle holds ideas for one thing only. The middle, where the circles overlap, holds ideas that are true for both things. Comparing words help us write: both, and, but, however, unlike and similar to. For example: Both the mango and the orange have seeds. The orange is bumpy but the mango is smooth.']],
+A:[{k:'info',id:'vn0',t:'Look at the diagram',x:'Mango circle on the left. Orange circle on the right. Both in the middle.',svg:1},
+{k:'sort',id:'vn1',t:'Build the Mango and Orange Venn diagram',c:['Mango only','Both','Orange only'],i:[['bigger',0,'🥭'],['fruit',1,'🍎'],['smaller',2,'🍊'],['smooth skin',0],['grow on trees',1,'🌳'],['bumpy skin',2],['one large seed',0],['juicy',1,'💧'],['divided into segments',2],['yellow, red or green',0],['have seeds',1],['orange colour',2]]},
+{k:'rows',id:'vn2',t:'Write three sentences that compare',x:'Use your diagram. Use a comparing word in your sentences.',b:['both','and','but','however','unlike','similar to'],r:[{l:'My comparing sentences',f:[{p:'Write at least 3 sentences',ta:1,sent:3,list:'both|and|but|however|unlike|similar to',need:1,m:'Use a comparing word such as both, but or unlike.',h:'Both the mango and the orange ___. The mango is ___ but the orange is ___.'}]}]},
+{k:'rows',id:'vn3',t:'Fruit plate design',r:[{e:'🍽️',l:'My fruit plate',f:[{p:'Describe your plate: one shared feature and one feature for each fruit',ta:1,sent:1}]}]}],
+Z:[Q('Where do we write things that are true for both?','in the middle where the circles overlap',['in the left circle only','in the right circle only'],'The overlap holds ideas true for both things.'),Q('How many circles does a Venn diagram have?','two',['one','five'],'A Venn diagram has two overlapping circles.'),Q('The mango is big ___ the orange is small.','but',['both','similar to'],'But shows a difference.'),Q('Which belongs only in the mango circle?','one large seed',['juicy','grow on trees'],'Only the mango has one large seed.'),Q('Which sentence compares two things?','Both fruits grow on trees.',['I like fruit.','The mango is yellow.'],'It talks about both fruits together.')],
+X:[{k:'rows',id:'vn4',t:'Extension: new Venn diagram',r:[{l:'Your idea',f:[{p:'Choose two things at home. Write one way they are alike and one way they are different.',ta:1,sent:2}]}]}]}
+];
+/* ---- READ ALOUD ----
+Uses speechSynthesis boundary events for word-by-word highlighting. Some browsers/voices
+(esp. some Android voices) send no word boundaries. If none arrives within 0.9s, a timer
+estimates each word's timing instead: close, but it can drift. Pause/resume support also varies
+by browser. Extra Support wraps every piece of visible text in word spans so that Play all,
+card reading and tap-a-word all share one highlighter. */
+let qu=[],last=null,lastList=[],cur_u=null,paused=false,tm=null,gotB=false,tk=0;
+const rate=()=>+$('#rate').value;
+const voice=()=>{const v=speechSynthesis.getVoices();return v.find(x=>/en[-_](GB|JM)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))};
+const msg=t=>$('#sm').textContent=t,WORD=/[\p{L}\p{N}]/u;
+const SEL='h2,h3,h4,p.st,.goal,.bank,.tx,.hint,.chip,.op,.bh,.fld label,.row>b,.sc small,.sum,th,td,.syl';
+const readables=r=>[...r.querySelectorAll(SEL)].filter(e=>e.getClientRects().length);
+function wrap(el){if(el._w)return;el._w=[];let t='';const tn=[];
+(function walk(n){n.childNodes.forEach(c=>{if(c.nodeType===3){if(c.textContent.trim())tn.push(c)}else if(c.nodeType===1&&!c.matches('[aria-hidden],input,textarea,script,.sp'))walk(c)})})(el);
+tn.forEach(n=>{const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(s=>{if(s&&WORD.test(s)){const k=document.createElement('span');k.className='w';k.textContent=s;f.append(k);el._w.push({s:k,st:t.length,en:t.length+s.length});t+=s+' '}else if(s)f.append(s)});n.replaceWith(f)});el._t=t}
+function clr(){document.querySelectorAll('.w.on,.p.on').forEach(x=>x.classList.remove('on'))}
+function hl(el,i){clr();const w=el._w[i];if(!w)return;w.s.classList.add('on');const r=w.s.getBoundingClientRect();if(r.top<90||r.bottom>innerHeight-130)w.s.scrollIntoView({block:'center',behavior:'smooth'})}
+function fb(el,i){if(!cur_u||el!==last)return;if(paused){tm=setTimeout(()=>fb(el,i),200);return}if(i>=el._w.length)return;hl(el,i);const l=el._w[i].en-el._w[i].st;tm=setTimeout(()=>fb(el,i+1),(200+l*40)/rate())}
+function stopSp(){clearTimeout(tm);if(window.speechSynthesis&&(speechSynthesis.speaking||speechSynthesis.pending||speechSynthesis.paused))speechSynthesis.cancel();cur_u=null;paused=false;tk++;clr()}
+function halt(){qu=[];stopSp()}
+function next(){if(qu.length)run(qu.shift())}
+function run(e){if(!e||!e.isConnected||!e.getClientRects().length)return next();e.matches('.syl')?sayParts(e,1):speak(e)}
+function play(list){if(!window.speechSynthesis){msg('Read aloud is not available in this browser.');return}halt();lastList=list;qu=list.slice();next()}
+function speak(el){stopSp();last=el;wrap(el);if(!el._w.length)return next();gotB=false;msg('');
+const u=new SpeechSynthesisUtterance(el._t);u.rate=rate();u.lang='en-GB';const v=voice();if(v)u.voice=v;cur_u=u;
+u.onstart=()=>{tm=setTimeout(()=>{if(!gotB){msg('This browser gives no word timing, so highlighting is estimated.');fb(el,0)}},900)};
+u.onboundary=e=>{if(e.name&&e.name!=='word')return;gotB=true;clearTimeout(tm);const i=el._w.findIndex(w=>e.charIndex>=w.st&&e.charIndex<w.en);if(i>=0)hl(el,i)};
+u.onend=u.onerror=()=>{if(cur_u!==u)return;clearTimeout(tm);clr();cur_u=null;next()};
+speechSynthesis.speak(u)}
+function say(t){if(!window.speechSynthesis){msg('Read aloud is not available in this browser.');return}halt();const u=new SpeechSynthesisUtterance(t);u.rate=rate();u.lang='en-GB';const v=voice();if(v)u.voice=v;speechSynthesis.speak(u)}
+function sayParts(el,internal){if(!window.speechSynthesis)return;internal?stopSp():halt();const my=tk,ps=[...el.querySelectorAll('.p')];ps.forEach(p=>{const u=new SpeechSynthesisUtterance(p.textContent);u.rate=.55;u.lang='en-GB';u.onstart=()=>{clr();p.classList.add('on')};speechSynthesis.speak(u)});const w=new SpeechSynthesisUtterance(el.dataset.w);w.rate=.7;w.lang='en-GB';w.onend=()=>{if(my!==tk)return;clr();if(internal)next()};speechSynthesis.speak(w)}
+const fbk=(el,t)=>{el.textContent=t;if($('#afb').checked)say(t.replace(/[\u2190-\u2BFF\u{1F000}-\u{1FFFF}✅]/gu,''))};
+/* ---- RENDERING ---- */
+const rd=(t,c='')=>`<div class="rd ${c}"><button class="sp" data-sp aria-label="Read aloud">🔊</button><span class="tx">${t}</span></div>`;
+const tot=m=>m.A.filter(a=>!['info','syl','hd'].includes(a.k)).length+1;
+const done=id=>{const m=ACT[id][1];(S.p[m.id]=S.p[m.id]||new Set()).add(id)};
+const svg=`<svg viewBox="0 0 360 170" role="img" aria-label="Venn diagram: mango circle, orange circle, both in the middle" style="max-width:420px;width:100%"><circle cx="135" cy="90" r="70" fill="#9fe09f" fill-opacity=".6" stroke="#1b5e4b" stroke-width="3"/><circle cx="225" cy="90" r="70" fill="#ffc27a" fill-opacity=".6" stroke="#1b5e4b" stroke-width="3"/><text x="85" y="95" font-size="16">🥭 Mango</text><text x="238" y="95" font-size="16">Orange 🍊</text><text x="165" y="50" font-size="15">Both</text><text x="150" y="105" font-size="26">🍽️</text></svg>`;
+function actHTML(a,m){ACT[a.id]=[a,m];const k=a.k,H=`<section class="card lc" id="${a.id}"><h3>${a.t}</h3>${lv==='sup'?'<button class="sm" data-card>🔊 Read this card</button>':''}`;
+if(k==='hd')return `<h3>${a.t}</h3>`;
+if(k==='info')return H+rd(a.x)+(a.svg?svg:'')+'</section>';
+if(k==='syl')return H+rd(a.x)+`<div class="sg">${SY.map(w=>`<div class="sc lc">${EM[w.join('')]?`<span class="big2" aria-hidden="true">${EM[w.join('')]}</span>`:''}<span class="syl" data-w="${w.join('')}">${w.map(p=>`<span class="p">${p}</span>`).join('<i>-</i>')}</span><small>${w.length} syllable${w.length>1?'s':''}</small><br><button class="sm" data-say="${w.join('')}">🔊 Hear it</button><button class="sm" data-parts>👏 Clap along</button></div>`).join('')}</div></section>`;
+if(k==='sort'){const it=lv==='sup'?a.i.slice(0,6):a.i;ST[a.id]={it,sel:-1,left:it.length};
+return H+rd('Tap a card, then tap the group where it belongs.')+`<div class="pool">${sh(it.map((_,i)=>i)).map(i=>`<button class="chip" data-c="${i}">${it[i][2]?`<span aria-hidden="true">${it[i][2]}</span> `:''}${it[i][0]}</button>`).join('')}</div><div class="bk">${a.c.map((c,i)=>`<div class="binw"><button class="bh" data-b="${i}">${c}</button><div class="in"></div></div>`).join('')}</div><p class="fb" aria-live="polite"></p><button class="sm" data-rs>↺ Try again</button></section>`}
+if(k==='ord'){ST[a.id]={pos:0};return H+rd(a.sp?'Tap the word parts in the correct order to build the word.':'Tap the events in the order they happened.')+`<div class="pool">${sh(a.i).map(x=>`<button class="chip">${x}</button>`).join('')}</div><ol class="built ${a.sp?'inl':''}"></ol><p class="fb" aria-live="polite"></p><button class="sm" data-rs>↺ Try again</button></section>`}
+if(k==='mc'){const op=a.q.map(q=>sh(lv==='sup'?[q.a,q.w[0]]:[q.a,...q.w]));ST[a.id]={op,first:[],ok:0};
+return H+a.q.map((q,qi)=>`<div class="qb" data-qi="${qi}">${rd(q.q)}${q.s&&EM[q.s]?`<div class="big2" aria-hidden="true">${EM[q.s]}</div>`:''}${q.s?`<button class="sm" data-say="${esc(q.s)}">🔊 Listen to the word</button>`:''}<button class="sm" data-say="${esc(op[qi].join('. '))}">🔊 Hear the choices</button><div class="ops">${op[qi].map((o,oi)=>`<button class="op" data-o="${oi}">${EM[o]?`<span aria-hidden="true">${EM[o]}</span> `:''}${o}</button>`).join('')}</div><p class="fb" aria-live="polite"></p></div>`).join('')+'</section>'}
+if(k==='rows')return H+(a.x?rd(a.x):'')+(a.b&&lv==='sup'?`<div class="bank">📝 Word bank: ${a.b.join(', ')}</div>`:'')+a.r.map((r,ri)=>`<div class="row">${r.e?`<span class="big2" aria-hidden="true">${r.e}</span> `:''}<b>${r.l}</b>${r.f.map((f,fi)=>`<div class="fld" data-r="${ri}" data-f="${fi}"><label>${f.p}<br>${f.ta?'<textarea rows="3"></textarea>':'<input type="text" autocomplete="off">'}</label>${lv==='sup'&&f.h?`<small class="hint">💡 ${f.h}</small>`:''}<p class="ff"></p></div>`).join('')}</div>`).join('')+`<button class="sm" data-chk>✔ Check my work</button><p class="fb" aria-live="polite"></p></section>`}
+function chk(f,v){v=v.trim();if(!v)return'Write your answer first.';
+if(f.cap&&!/^[A-Z]/.test(v))return'A proper noun starts with a capital letter. Try again!';
+if(f.low&&!/^[a-z]/.test(v))return'A common noun is a general name. It starts with a small letter.';
+if(f.d){const p=v.toLowerCase().split(/[-\s·\/.]+/).filter(Boolean),d=f.d.split('-');if(p.join('')!==d.join('')||p.length!==d.length)return`Not quite. Clap it again. Correct division: ${f.d} (${d.length} syllable${d.length>1?'s':''}).`}
+if(f.re&&!new RegExp(f.re,'i').test(v))return f.m||'Write a little more.';
+if(f.list&&new Set(v.toLowerCase().match(new RegExp('\\b('+f.list+')\\b','g'))||[]).size<(f.need||1))return f.m;
+if(f.sent&&v.split(/[.!?]+/).filter(s=>s.trim().length>2).length<f.sent)return`Write at least ${f.sent} sentence${f.sent>1?'s':''}. End each with a full stop.`;
+if(f.n&&v.split(',').filter(s=>s.trim()).length<f.n)return`Write ${f.n} words with commas between them.`;return''}
+function mod(id){cur=id;const m=M.find(x=>x.id===id),exts=lv==='ext'?m.X:[];
+$('#app').innerHTML=`<button class="sm" data-home>🏠 Home</button><h2>${m.ic} ${m.n}</h2><p>${m.st}</p><div class="goal">⭐ My goal: ${m.g}</div>${lv==='sup'?'<div class="bank">👆 Extra support: press 🔊 to hear the words with each word lit up. Tap any word to hear it.</div>':''}<div id="learn"><h3>Learn</h3>${m.L.map(l=>`<div class="card lc"><h4>${l[0]}</h4>${lv==='sup'?'<button class="sm" data-card>🔊 Read this card</button>':''}${rd(l[1],'big')}</div>`).join('')}</div><h3>Practise</h3>${m.A.map(a=>actHTML(a,m)).join('')}<h3>Check my learning</h3>${actHTML({k:'mc',id:m.id+'z',t:'Quick quiz',z:1,q:m.Z},m)}${exts.length?'<h3>Extension challenge</h3>'+exts.map(a=>actHTML(a,m)).join(''):''}`;prep();scrollTo(0,0);if(lv==='sup')play([$('#app h2')])}
+function prep(){$('#app').classList.toggle('tap',lv==='sup');if(lv!=='sup')return;readables($('#app')).forEach(e=>{if(!e.matches('.syl'))wrap(e)});document.querySelectorAll('#app .lc').forEach(c=>{if(!c.matches('section')){c.tabIndex=0;c.setAttribute('role','group');c.setAttribute('aria-label','Learning card. Press Enter to hear it.')}})}
+function ui(){halt();$('#bPlay').textContent=lv==='sup'?'▶ Play all':'▶ Read the notes'}
+function home(){cur=null;$('#app').innerHTML=`<h2>Welcome, learners! 👋</h2>${rd('Pick a topic to start. Press the speaker button to hear anything read aloud. You can try again as many times as you like.')}<div class="grid">${M.map(m=>`<button class="mc" data-m="${m.id}"><span class="ic" aria-hidden="true">${m.ic}</span><br><b>${m.n}</b><br><small>${m.st}</small><div class="bar" aria-label="Progress"><i style="width:${Math.round(100*((S.p[m.id]||new Set()).size)/tot(m))}%"></i></div></button>`).join('')}<button class="mc" data-rev><span class="ic" aria-hidden="true">📊</span><br><b>My progress review</b></button></div>`;prep()}
+function rev(){cur=null;$('#app').innerHTML=`<button class="sm" data-home>🏠 Home</button><h2>📊 My progress review</h2><div class="card"><table><tr><th>Topic</th><th>Quiz (first try)</th><th>Activities done</th></tr>${M.map(m=>{const q=S.q[m.id],n=(S.p[m.id]||new Set()).size;return`<tr><td>${m.ic} ${m.n}</td><td>${q?q.s+' / '+q.t:'Not tried yet'}</td><td>${n} of ${tot(m)}</td></tr>`}).join('')}</table></div><div class="goal">Finishing activities shows effort. Your teacher will check your understanding using the lesson success criteria, observation and exit tickets.</div>`}
+function fin(sec,a,m,s){const sc=s.first.filter(Boolean).length,n=a.q.length,miss=a.q.filter((q,i)=>!s.first[i]).map(q=>q.q);if(a.z)S.q[m.id]={s:sc,t:n};done(a.id);
+sec.insertAdjacentHTML('beforeend',`<div class="sum">⭐ ${a.z?`You got ${sc} out of ${n} on the first try.`:'You answered every question!'}${miss.length?' Look again at: '+miss.join(' / '):' Well done!'}</div><button class="sm" data-rs>↺ ${a.z?'Take the quiz again':'Try again'}</button>`)}
+document.addEventListener('click',e=>{const t=e.target;let b;
+if(lv==='sup'&&(b=t.closest('.w'))){say(b.textContent.replace(/[^\p{L}\p{N}’'-]/gu,''));b.classList.add('on');setTimeout(()=>b.classList.remove('on'),900);if(!t.closest('button'))return}
+if(b=t.closest('[data-sp]'))return play([b.parentElement.querySelector('.tx')]);
+if(b=t.closest('[data-card]'))return play(readables(b.closest('.lc')));
+let c;if(lv==='sup'&&(c=t.closest('.lc'))&&!c.matches('section')&&!t.closest('button,.w,input,textarea,label'))return play(readables(c));
+if(b=t.closest('[data-say]'))return say(b.dataset.say);
+if(b=t.closest('[data-parts]'))return sayParts(b.parentElement.querySelector('.syl'));
+if(b=t.closest('[data-m]'))return mod(b.dataset.m);
+if(t.closest('[data-home]'))return home();if(t.closest('[data-rev]'))return rev();
+const sec=t.closest('section.card');if(!sec||!ACT[sec.id])return;const id=sec.id,[a,m]=ACT[id],s=ST[id],f=sec.querySelector('.fb');
+if(t.closest('[data-rs]')){sec.outerHTML=actHTML(a,m);prep();return}
+if(a.k==='sort'){if(b=t.closest('.chip')){if(b.disabled)return;sec.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));b.classList.add('sel');s.sel=+b.dataset.c;return}
+if(b=t.closest('.bh')){if(s.sel<0)return fbk(f,'👆 Tap a card first.');const x=s.it[s.sel],bi=+b.dataset.b;
+if(x[1]===bi){const ch=sec.querySelector(`.chip[data-c="${s.sel}"]`);ch.classList.remove('sel');ch.classList.add('ok');ch.disabled=true;b.nextElementSibling.append(ch);s.sel=-1;s.left--;fbk(f,`✅ ${x[0]} goes in ${a.c[bi]}. ${a.w?a.w[bi]:''}${s.left?'':' 🎉 All sorted!'}`);if(!s.left)done(id)}
+else fbk(f,`Not quite. ${x[0]} does not belong in ${a.c[bi]}. Have another look and try a different group.`)}}
+else if(a.k==='ord'){b=t.closest('.chip');if(!b||b.disabled)return;const x=a.i[s.pos];
+if(b.textContent===x){b.disabled=true;b.classList.add('ok');const li=document.createElement('li');li.textContent=x;sec.querySelector('.built').append(li);s.pos++;
+if(s.pos===a.i.length){fbk(f,a.sp?`🎉 You built ${a.i.join('')}! Listen to it.`:'🎉 All in order! Now try retelling it in your own words.');if(a.sp)say(a.i.join(''));done(id)}else fbk(f,'✅ Yes! Keep going.')}
+else fbk(f,a.sp?'Not yet. Say the word slowly. Which part comes next?':'Not yet. What happened first? What happened next? Try another.')}
+else if(a.k==='mc'){b=t.closest('.op');if(!b||b.disabled)return;const qb=b.closest('.qb'),qi=+qb.dataset.qi,q=a.q[qi],v=s.op[qi][+b.dataset.o],ff=qb.querySelector('.fb');
+if(v===q.a){qb.querySelectorAll('.op').forEach(o=>o.disabled=true);b.classList.add('ok');if(s.first[qi]===undefined)s.first[qi]=1;s.ok++;fbk(ff,`✅ Correct! ${q.e}`);if(s.ok===a.q.length)fin(sec,a,m,s)}
+else{if(s.first[qi]===undefined)s.first[qi]=0;b.disabled=true;b.classList.add('no');fbk(ff,`Not quite. ${q.e} Try another answer.`)}}
+else if(a.k==='rows'&&t.closest('[data-chk]')){let all=1;sec.querySelectorAll('.fld').forEach(d=>{const fl=a.r[+d.dataset.r].f[+d.dataset.f],g=chk(fl,d.querySelector('input,textarea').value),p=d.querySelector('.ff');p.textContent=g?'🤔 '+g:'✅ Good!';p.className='ff '+(g?'no':'ok2');if(g)all=0});
+fbk(f,all?'🎉 Great work! Everything checks out.':'Fix the 🤔 messages, then press Check again.');if(all)done(id)}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&lv==='sup'&&e.target.classList&&e.target.classList.contains('lc')&&!e.target.matches('section')){e.preventDefault();play(readables(e.target))}});
+$('#lv').onchange=e=>{lv=e.target.value;ui();cur?mod(cur):home()};
+$('#bPlay').onclick=()=>{if(lv==='sup')return play(readables($('#app')));let els=[...document.querySelectorAll('#learn .tx')];if(!els.length)els=[...document.querySelectorAll('.tx')];play(els)};
+$('#bPause').onclick=()=>{if(window.speechSynthesis){speechSynthesis.pause();paused=true}};
+$('#bRes').onclick=()=>{if(window.speechSynthesis){speechSynthesis.resume();paused=false}};
+$('#bStop').onclick=halt;
+$('#bRep').onclick=()=>{if(lastList.length)play(lastList)};
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{};
+ui();home();
+</script>
+</body>
+</html>
