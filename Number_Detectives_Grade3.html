@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Number Detectives & Ordinal Adventures – Grade 3 Maths</title>
+<style>
+:root{--ink:#26264f;--pu:#7b4dff;--pk:#ff5c9d;--or:#ff9f1c;--gr:#1fa463;--bl:#2b8cff;--yl:#ffd23f;--rd:#e8465a}
+*{box-sizing:border-box}
+body{margin:0;font:600 18px/1.55 "Trebuchet MS","Comic Sans MS","Segoe UI",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,#fff 0 4%,transparent 5%),linear-gradient(180deg,#bfe9ff,#fff0c2) fixed;padding-bottom:190px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:99}
+.bar{background:linear-gradient(90deg,var(--pu),var(--pk),var(--or));color:#fff;padding:10px 16px;font-size:1.15rem;font-weight:800;text-align:center}
+main{max-width:980px;margin:0 auto;padding:14px}
+h1,h2,h3{margin:.2em 0;line-height:1.2}h1{font-size:2rem}h2{font-size:1.5rem}
+:focus-visible{outline:4px solid #ff5c00;outline-offset:2px}
+.c{background:#fff;border-radius:26px;padding:18px;box-shadow:0 8px 0 rgba(38,38,79,.12);margin:14px 0}
+.hero{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,#fff,#efe7ff)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.b{font:inherit;font-weight:800;border:0;border-radius:18px;padding:10px 18px;color:#fff;background:var(--pu);box-shadow:0 5px 0 #4b2bb5;cursor:pointer;min-height:46px;margin:4px;transition:transform .15s}
+.b:hover{transform:translateY(-2px)}.b:active{transform:translateY(3px);box-shadow:0 2px 0 #4b2bb5}
+.b.sm{padding:6px 12px;min-height:38px;font-size:.9rem}.b.alt{background:var(--or);box-shadow:0 5px 0 #b86d00}.b.gr{background:var(--gr);box-shadow:0 5px 0 #0f7040}
+.b.pk{background:var(--pk);box-shadow:0 5px 0 #b82e68}.b.bl{background:var(--bl);box-shadow:0 5px 0 #1b5fb0}
+.b[disabled]{opacity:.55;cursor:not-allowed}.b.ok{background:var(--gr)!important;opacity:1}.b.no{background:var(--rd)!important}
+.b.sel{outline:5px solid var(--yl);transform:scale(1.06)}
+.w1{border-top:10px solid var(--pu)}.w2{border-top:10px solid var(--or)}.wf{border-top:10px solid var(--gr)}
+.em{font-size:2.1rem;letter-spacing:2px;line-height:1.4;margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.cardn{min-width:58px;padding:8px 12px;text-align:center;border-radius:16px;color:#fff;font-size:1.5rem;font-weight:900;background:hsl(var(--h,260) 75% 50%);box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.cardn.hi{outline:4px solid var(--yl)}.cardn.blank{background:#fff;color:var(--pu);border:3px dashed var(--pu)}
+.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pb{flex:1;min-width:120px;height:16px;border-radius:9px;background:#fff;overflow:hidden;box-shadow:inset 0 0 0 2px #ddd}.pb i{display:block;height:100%;background:linear-gradient(90deg,var(--gr),var(--yl));transition:width .4s}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px}
+.opt{font-size:1.1rem;background:var(--bl);box-shadow:0 5px 0 #1b5fb0}
+.fb{border-radius:16px;padding:10px 14px;margin:10px 0;background:#e6fff2;border:3px solid var(--gr)}.fb.bad{background:#fff0f0;border-color:var(--rd)}.fb.h{background:#fff8dc;border-color:var(--or)}
+.tin input{font:inherit;font-size:1.4rem;padding:8px 12px;border-radius:14px;border:3px solid var(--pu);width:170px}
+.bk{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.bucket{background:#f3efff;border-radius:18px;padding:8px;min-height:90px;text-align:center}.bucket .in{display:flex;flex-wrap:wrap;justify-content:center}
+.card{background:var(--pk);box-shadow:0 5px 0 #b82e68}.card.num{font-size:1.5rem;min-width:56px}
+.slots{display:flex;flex-wrap:wrap;gap:6px;min-height:56px;padding:8px;border-radius:16px;background:#f3efff;margin:8px 0}
+.track{display:flex;gap:10px;align-items:flex-end;overflow-x:auto;padding:10px;border-radius:18px;background:linear-gradient(#d9f7c8,#b7e8a0);margin:8px 0}
+.rn{text-align:center;min-width:64px}.rn b{display:block;font-size:2.3rem}.rn small{font-weight:800}.flag{font-size:2.3rem}
+.stars{color:#f5a800;font-size:1.3rem;letter-spacing:2px}.lock{opacity:.6}
+.badge{display:inline-block;margin:4px;padding:6px 12px;border-radius:20px;background:#fff7d6;border:3px solid var(--yl)}.badge.off{filter:grayscale(1);opacity:.5;background:#eee;border-color:#ccc}
+table.oc{border-collapse:separate;border-spacing:6px;width:100%}
+.ra .s{border-radius:8px;transition:background .2s;cursor:pointer}.ra .s:hover{background:#f1eaff}
+.ra .s.on{background:#fff1a8;box-shadow:0 0 0 3px #fff1a8}
+.ra .w.on{background:var(--yl);color:#000;outline:3px solid var(--or);border-radius:6px}
+#ra{position:fixed;left:0;right:0;bottom:0;background:#26264f;color:#fff;padding:8px 10px;z-index:50;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+#ra .b{margin:2px;padding:6px 10px;min-height:40px;font-size:.9rem}#ra select,#ra label{font:inherit;font-size:.85rem}#ra select{max-width:190px}
+#rbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px}#rmsg{font-size:.8rem;color:#ffe9a0;min-height:1.2em}
+.note{max-width:980px;margin:0 auto;padding:0 14px 14px;font-size:.85rem}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.pop{animation:pop .5s}@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:560px){body{font-size:16px;padding-bottom:230px}h1{font-size:1.6rem}}
+</style></head><body>
+<a class="skip" href="#screen">Skip to game</a>
+<div class="bar">🔎 Number Detectives &amp; Ordinal Adventures</div>
+<main id="screen"></main>
+<div class="note" id="foot"></div>
+<div id="ra" role="region" aria-label="Read Aloud controls">
+<div id="rbar">
+<button class="b gr" id="rPlay">🔊 Read aloud</button><button class="b alt" id="rPause">⏯ Pause / Resume</button><button class="b pk" id="rStop">⏹ Stop</button>
+<button class="b bl" id="rPrev">⏮ Back</button><button class="b bl" id="rRep">🔁 Again</button><button class="b bl" id="rNext">⏭ Next</button>
+<label>Speed <select id="rate"><option value=".7">Slow</option><option value="1" selected>Normal</option><option value="1.3">Fast</option></select></label>
+<label>Voice <select id="voice" aria-label="Voice"></select></label>
+<label><input type="checkbox" id="rOn" checked> Read Aloud on</label></div>
+<div id="rmsg" aria-live="polite">Tip: tap any sentence to hear just that sentence.</div></div>
+<script>
+'use strict';
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),pick=a=>a[rnd(0,a.length-1)];
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ORD=['first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth','eleventh','twelfth','thirteenth','fourteenth','fifteenth','sixteenth','seventeenth','eighteenth','nineteenth','twentieth'];
+const sym=n=>n+((n%100>=11&&n%100<=13)?'th':({1:'st',2:'nd',3:'rd'}[n%10]||'th'));
+const stars=n=>'★'.repeat(n)+'☆'.repeat(3-n);
+const PRAISE=['Great job!','Brilliant!','Well done, Detective!','Super thinking!','You got it!'];
+const CT=['Counting numbers','Whole numbers','Cardinal numbers'];
+/* ---------- storage (works even if unavailable) ---------- */
+let canStore=true;try{localStorage.setItem('t','1');localStorage.removeItem('t')}catch(e){canStore=false}
+let S={lvl:'o',learned:{},stars:{},tag:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem('numdet3')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('numdet3',JSON.stringify(S))}catch(e){}};
+/* ---------- Read Aloud: word text is wrapped so boundary charIndex maps exactly onto its sentence ---------- */
+function ra(text,tag='p',cls=''){
+ const ss=(text.match(/[^.!?]+[.!?]*/g)||[text]).map(s=>s.trim()).filter(Boolean);
+ return `<${tag} class="ra ${cls}">`+ss.map(t=>{let h='',l=0,m;const re=/\S+/g;
+  while((m=re.exec(t))){h+=E(t.slice(l,m.index))+`<span class="w" data-o="${m.index}">${E(m[0])}</span>`;l=re.lastIndex}
+  return `<span class="s" data-t="${E(t)}">${h}</span>`}).join(' ')+`</${tag}>`}
+const RA={ok:'speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined',on:true,rate:1,voice:null,vl:[],list:[],i:0,sess:0,single:false,
+ msg(t){$('#rmsg').textContent=t},
+ clear(){$$('.s.on,.w.on').forEach(e=>e.classList.remove('on'))},
+ voices(){if(!this.ok)return;const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));this.vl=v;
+  const keep=this.voice&&v.indexOf(this.voice)>=0;if(!keep)this.voice=v.find(x=>x.default)||v[0]||null;
+  $('#voice').innerHTML=v.length?v.map((x,k)=>`<option value="${k}"${x===this.voice?' selected':''}>${E(x.name)}</option>`).join(''):'<option>Default voice</option>'},
+ play(list,i=0,single=false){
+  if(!this.ok)return;if(!this.on){this.msg('Read Aloud is off. Tick "Read Aloud on" to use it.');return}
+  speechSynthesis.cancel();const id=++this.sess;this.clear();
+  this.list=list||$$('#screen .s');this.single=single;if(!this.list.length)return;
+  this.i=Math.max(0,Math.min(i,this.list.length-1));this.msg('Reading… the sentence is highlighted. Word highlighting starts if your voice supports it.');this.say(id)},
+ say(id){const el=this.list[this.i];if(!el)return;this.clear();el.classList.add('on');
+  el.scrollIntoView({block:'nearest',behavior:RM?'auto':'smooth'});
+  const u=new SpeechSynthesisUtterance(el.dataset.t),ws=$$('.w',el);let got=false;
+  u.rate=this.rate;u.lang=this.voice?this.voice.lang:'en-US';if(this.voice)u.voice=this.voice;
+  const W=[...el.querySelectorAll('.w')];
+  u.onboundary=e=>{if(id!==this.sess||(e.name&&e.name!=='word'))return;
+   if(!got){got=true;this.msg('Word-by-word highlighting is on.')}
+   let c=null;for(const w of W){if(+w.dataset.o<=e.charIndex)c=w;else break}
+   W.forEach(w=>w.classList.remove('on'));if(c){c.classList.add('on');c.scrollIntoView({block:'nearest',behavior:RM?'auto':'smooth'})}};
+  u.onend=()=>{if(id!==this.sess)return;W.forEach(w=>w.classList.remove('on'));
+   if(!got)this.msg('This voice does not report word positions, so whole sentences are highlighted instead.');
+   if(this.single||this.i>=this.list.length-1){el.classList.remove('on')}else{this.i++;this.say(id)}};
+  u.onerror=e=>{if(id!==this.sess||e.error==='interrupted'||e.error==='canceled')return;this.msg('Sorry, the voice had a problem. Try another voice or press Read aloud again.');this.clear()};
+  setTimeout(()=>{if(id===this.sess)speechSynthesis.speak(u)},40)},
+ stop(){this.sess++;if(this.ok)try{speechSynthesis.cancel()}catch(e){}this.clear()},
+ toggle(){if(!this.ok)return;if(speechSynthesis.paused){speechSynthesis.resume()}else if(speechSynthesis.speaking){speechSynthesis.pause()}else this.play()},
+ quick(t){if(!this.ok||!this.on)return;this.stop();const u=new SpeechSynthesisUtterance(t);u.rate=this.rate;if(this.voice){u.voice=this.voice;u.lang=this.voice.lang}speechSynthesis.speak(u)}};
+(function(){
+ if(!RA.ok){$('#rbar').hidden=true;RA.msg('Read Aloud needs a browser with speech support (such as Chrome, Edge or Safari). The game works without it.');return}
+ RA.voices();speechSynthesis.onvoiceschanged=()=>RA.voices();
+ $('#rPlay').onclick=()=>RA.play();$('#rPause').onclick=()=>RA.toggle();$('#rStop').onclick=()=>{RA.stop();RA.msg('Stopped.')};
+ $('#rPrev').onclick=()=>RA.play(RA.list.length?RA.list:null,RA.i-1,RA.single);$('#rNext').onclick=()=>RA.play(RA.list.length?RA.list:null,RA.i+1,RA.single);
+ $('#rRep').onclick=()=>RA.play(RA.list.length?RA.list:null,RA.i,true);
+ $('#rate').onchange=e=>{RA.rate=+e.target.value;if(speechSynthesis.speaking)RA.play(RA.list,RA.i,RA.single)};
+ $('#voice').onchange=e=>{RA.voice=RA.vl[+e.target.value]||null;if(speechSynthesis.speaking)RA.play(RA.list,RA.i,RA.single)};
+ $('#rOn').onchange=e=>{RA.on=e.target.checked;if(!RA.on){RA.stop();RA.msg('Read Aloud is off.')}else RA.msg('Read Aloud is on.')};
+ addEventListener('beforeunload',()=>RA.stop());
+})();
+document.addEventListener('click',e=>{const s=e.target.closest('#screen .s');if(s&&RA.ok){const L=$$('#screen .s');RA.play(L,L.indexOf(s),true)}});
+/* ---------- visuals ---------- */
+const MASC=`<svg viewBox="0 0 130 120" width="120" role="img" aria-label="Detective Dot, a friendly cartoon detective"><circle cx="55" cy="68" r="38" fill="#ffd9a8"/><path d="M20 52h70c-4-30-66-30-70 0z" fill="#7b4dff"/><rect x="12" y="50" width="86" height="8" rx="4" fill="#5a33d6"/><circle cx="42" cy="70" r="5" fill="#26264f"/><circle cx="68" cy="70" r="5" fill="#26264f"/><circle cx="34" cy="80" r="5" fill="#ff9db8"/><circle cx="76" cy="80" r="5" fill="#ff9db8"/><path d="M42 86q13 12 26 0" stroke="#26264f" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="98" cy="86" r="16" fill="#cfeeff" stroke="#ff9f1c" stroke-width="6"/><path d="M109 98l12 14" stroke="#ff9f1c" stroke-width="8" stroke-linecap="round"/><text x="92" y="92" font-size="18" font-weight="900" fill="#7b4dff">1</text></svg>`;
+const chips=(a,hi)=>`<div class="chips">`+a.map(n=>`<span class="cardn${n===hi?' hi':''}" style="--h:${(n*37+200)%360}">${n}</span>`).join('')+`</div>`;
+const ems=(e,n,nm)=>`<div class="em" role="img" aria-label="${n} ${nm}">${n?(e+' ').repeat(n):'🧺 (empty basket)'}</div>`;
+const line=(arr,flag,lab)=>`<div class="track" role="img" aria-label="${lab}"><span class="flag">${flag}</span>`+arr.map(r=>`<span class="rn"><b>${r.e}</b><small>${r.n}</small></span>`).join('')+`</div>`;
+const RUN=[{n:'Carys',e:'🐇'},{n:'Sian',e:'🦊'},{n:'Leroy',e:'🐶'},{n:'Ana',e:'🐱'},{n:'Kemar',e:'🐼'},{n:'Jada',e:'🦁'},{n:'Tia',e:'🐸'},{n:'Marcus',e:'🐢'}];
+const THINGS=[['🍎','apples'],['✏️','pencils'],['📚','books'],['🍊','oranges'],['🐟','fish'],['⭐','stars'],['🧸','toys'],['🍌','bananas'],['🐶','dogs'],['🧁','cupcakes']];
+/* ---------- question builders ---------- */
+const mc=(tag,t,o,a,hint,why,vis)=>({k:'mc',tag,t,o:shuf(o),a,hint,why,vis});
+const ty=(tag,t,a,hint,why,vis,num=true)=>({k:'type',tag,t,a:[].concat(a).map(String),hint,why,vis,num});
+const nopts=(n,lo,hi)=>{const s=new Set([n]);let g=0;while(s.size<4&&g++<99)s.add(rnd(Math.max(0,lo),hi));return [...s].map(String)};
+const ordOpts=(k,N)=>{const s=new Set([k]);while(s.size<Math.min(4,N))s.add(rnd(0,N-1));return [...s].map(i=>ORD[i])};
+/* WORLD 1 */
+const gDetective=L=>{const Y=[['⏰','a clock'],['📅','a calendar'],['📱','a phone'],['🌡️','a thermometer'],['⚖️','a scale'],['🎲','dice']],N=[['🌳','a tree'],['🍌','a banana'],['🐶','a dog'],['🌈','a rainbow'],['🌻','a flower'],['☁️','a cloud']];
+ return [0,1].map(()=>{const k=L==='s'?3:4,it=shuf(shuf(Y).slice(0,k).map(x=>({l:x[0]+' '+x[1],b:0,w:'Look closely. That object has numbers on it.'})).concat(shuf(N).slice(0,k).map(x=>({l:x[0]+' '+x[1],b:1,w:'Look closely. That object does not show numbers.'}))));
+  return {k:'sort',tag:'Spotting numbers',t:'Numbers are everywhere! Be a Number Detective. Tap an object, then tap the box where it belongs.',items:it,bk:['Has numbers','No numbers'],hint:'Think: can you read a number on it, like on a clock face?',why:'Numbers are found everywhere, such as on clocks, calendars, phones and dice.'}})};
+const gCount=L=>{const r={s:[1,5],o:[3,10],c:[8,16]}[L];return [0,1,2,3,4].map(i=>{const [e,nm]=pick(THINGS);
+ if(i===4&&L!=='s')return mc('Zero','Look at the empty basket. How many mangoes are in it?',nopts(0,0,4),'0','Count them. Is there anything inside?','There are zero mangoes. Zero tells how many. It is a whole number, but it is not a counting number.',ems('🥭',0,'mangoes'));
+ const n=rnd(...r);return mc('Cardinal numbers',`Count the ${nm}. Which cardinal number tells how many ${nm} there are?`,nopts(n,n-3,n+3),''+n,'Touch each one as you count: one, two, three. The last number you say tells how many.',`There are ${n} ${nm}. The number ${n} is a cardinal number because it tells how many.`,ems(e,n,nm))})};
+const gSortNum=L=>{const nums={s:[0,1,2,3,4,5],o:[0,1,2,3,4,5,6,7,8,9,10],c:[0,3,18,25,60,100,0].slice(0,6)}[L];
+ const q1={k:'sort',tag:'Counting numbers',t:'Sort the number cards. Which are whole numbers only, and which are also counting numbers? Tap a card, then tap a box.',items:shuf(nums.map(n=>({l:''+n,b:n===0?0:1,num:1,w:n===0?'Zero is a whole number, but we cannot count zero.':'We can count to this number, so it is a counting number and a whole number.'}))),bk:['Whole number only (not a counting number)','Counting number (and a whole number)'],hint:'Counting numbers start at 1. Which card cannot be used to count?',why:'Counting numbers start at 1. Zero is a whole number only. Every counting number is also a whole number.'};
+ const P=[['1, 2, 3, 4, 5',0],['0, 1, 2, 3, 4, 5',1],['5 books on a shelf',2],['The smallest one is 1',0],['The smallest one is 0',1],['3 apples in a bag',2]];
+ const it=shuf(P).slice(0,L==='s'?3:6).map(p=>({l:p[0],b:p[1],w:'Think about whether it starts at 1, includes 0, or tells how many.'}));
+ const q2={k:'sort',tag:'Counting numbers',t:'Which type of number is each card about? Tap a card, then tap a box.',items:it,bk:CT,hint:'Counting numbers start at 1. Whole numbers start at 0. Cardinal numbers tell how many.',why:'Counting numbers start at 1, whole numbers include 0, and cardinal numbers tell how many.'};
+ return [q1,q2,{...q1,items:shuf(q1.items.map(x=>({...x}))),t:'One more! Sort these number cards. Tap a card, then tap a box.'}]};
+const gZero=L=>{const b=ems('🥭',0,'mangoes'),T='Zero',A=[
+ mc(T,'If there are 0 mangoes in a basket, is 0 a whole number?',['Yes, zero is a whole number','No, zero is not a whole number'],'Yes, zero is a whole number','Whole numbers are 0, 1, 2, 3 and so on.','Whole numbers start at 0, so zero is a whole number.',b),
+ mc(T,'Is 0 a counting number? We cannot count nothing.',['Yes, it is a counting number','No, it is not a counting number'],'No, it is not a counting number','Counting numbers start at 1.','Counting numbers start at 1, so zero is not a counting number.',b),
+ mc(T,'What whole number comes before 1?',nopts(0,0,4),'0','Look at the whole numbers: 0, 1, 2, 3.','Zero comes before one. We write 0, 1, 2, 3.',chips([0,1,2,3],0)),
+ mc(T,'What is the smallest whole number?',['0','1','2','10'],'0','The whole numbers start before the counting numbers.','The smallest whole number is zero.'),
+ mc(T,'What is the smallest counting number?',['0','1','2','10'],'1','Counting numbers do not include zero.','The smallest counting number is one.'),
+ mc(T,'Which group is NOT all counting numbers?',['1, 2, 3','0, 1, 2','4, 5, 6'],'0, 1, 2','Look for the number we cannot count.','Zero is not a counting number, so 0, 1, 2 is not all counting numbers.')];
+ return shuf(A).slice(0,5)};
+const gWhich=L=>{const C=[['I start from zero and go on forever and ever.',1],['I tell how many objects there are.',2],['Let us play hide and seek! One, two, three, four, five. I start at one.',0],['I am 0, 1, 2, 3, 4, 5 and so on.',1],['I tell the amount of things in a set.',2],['I never include zero because you cannot count nothing.',0],['I am the 5 in five pencils.',2],['I am every counting number, and I also have zero.',1]];
+ return shuf(C).slice(0,5).map(c=>mc(CT[c[1]],`Which type of number am I? ${c[0]}`,CT.slice(),CT[c[1]],'Counting numbers start at 1. Whole numbers start at 0. Cardinal numbers tell how many.',`The clue matches ${CT[c[1]].toLowerCase()}.`,'<div class="em">🕵️❓</div>'))};
+const seqVis=(a,h)=>`<div class="chips">`+a.map((n,i)=>i===h?'<span class="cardn blank">?</span>':`<span class="cardn" style="--h:${(n*37+200)%360}">${n}</span>`).join('')+'</div>';
+const gMissing=L=>[0,1,2,3,4].map(i=>{
+ if(L==='s'||(L==='o'&&i<2)){const st=L==='s'?1:rnd(1,40),h=rnd(1,3),a=[0,1,2,3,4].map(k=>st+k);return ty('Number order','Fill the missing number. Type it.',a[h],'Count on from the number before it.',`The missing number is ${a[h]}.`,seqVis(a,h))}
+ if(L==='c'&&i>0&&i<3){const sp=pick([2,5,10]),st=sp*rnd(1,5),h=rnd(1,3),a=[0,1,2,3,4].map(k=>st+sp*k);return ty('Number order','Complete the pattern. What number is missing? Type it.',a[h],`Look at how much the numbers jump each time. They jump by ${sp}.`,`The numbers jump by ${sp}, so the missing number is ${a[h]}.`,seqVis(a,h))}
+ if(L==='c'&&i===0)return ty('Zero','What whole number comes before 1? Type it.',0,'Whole numbers start at 0.','Zero comes before one.',`<div class="chips"><span class="cardn blank">?</span><span class="cardn">1</span></div>`);
+ const n=rnd(2,99),d=pick(['before','after']);return ty('Number order',`What number comes ${d} ${n}? Type it.`,d==='before'?n-1:n+1,d==='before'?`Count back one from ${n}.`:`Count on one from ${n}.`,`The number ${d} ${n} is ${d==='before'?n-1:n+1}.`,d==='before'?`<div class="chips"><span class="cardn blank">?</span><span class="cardn">${n}</span></div>`:`<div class="chips"><span class="cardn">${n}</span><span class="cardn blank">?</span></div>`)});
+const gHow=L=>{const r={s:[1,6],o:[3,12],c:[8,18]}[L];return shuf(THINGS).slice(0,5).map(t=>{const n=rnd(...r);return ty('Cardinal numbers',`How many ${t[1]} are there? Type the number.`,n,'Count carefully, one at a time.',`There are ${n} ${t[1]}. The cardinal number ${n} tells how many.`,ems(t[0],n,t[1]))})};
+const FIX1=[['Kai says counting numbers start at zero.','Counting numbers start at 1','Counting numbers start at 10','Counting numbers start at 1. You cannot count zero.'],
+ ['Mia says zero is not a whole number.','Zero is a whole number','Zero is the biggest number','Whole numbers are 0, 1, 2, 3 and so on, so zero is a whole number.'],
+ ['Sam says the 6 in six books tells the position of a book.','The 6 tells how many books','The 6 tells which book is first','A cardinal number tells how many. Six books means a set of six.'],
+ ['Tia says 0, 1, 2 and 3 are all counting numbers.','Zero is not a counting number','Three is not a counting number','Counting numbers begin at 1. Zero is a whole number only.'],
+ ['Ana says every whole number is a counting number.','Zero is a whole number but not a counting number','Counting numbers are not whole numbers','Every counting number is a whole number, but zero is not a counting number.'],
+ ['Leroy counted these pencils and says there are 5.','There are 4 pencils','There are 6 pencils','Count again: one, two, three, four. The cardinal number is 4.',ems('✏️',4,'pencils')]];
+const RSN=[['Why is 5 called a cardinal number in five pencils?','It tells how many pencils there are','It tells which pencil is first','It is the smallest number','A cardinal number tells how many.'],
+ ['Why is zero not a counting number?','We start counting at 1','Zero is too big','Zero is not a number','Counting starts at 1, so zero is a whole number but not a counting number.'],
+ ['Why is zero a whole number?','Whole numbers include 0, 1, 2, 3 and so on','Zero is bigger than 1','Zero has two digits','Whole numbers are counting numbers with zero added.']];
+const gFix=L=>{const f=x=>mc('Classifying numbers',`Detective Dot found a mistake. ${x[0]} What is the mistake?`,[x[1],x[2],'There is no mistake'],x[1],'Remember the lesson: counting numbers start at 1, whole numbers start at 0, cardinal numbers tell how many.',x[3],x[4]);
+ const r=x=>mc('Reasoning',x[0],[x[1],x[2],x[3]],x[1],'Think about what the number tells you.',x[4]);
+ return L==='c'?shuf(FIX1).slice(0,3).map(f).concat(shuf(RSN).slice(0,2).map(r)):shuf(FIX1).slice(0,5).map(f)};
+const gLife=L=>{const mx={s:5,o:10,c:25}[L],a=rnd(1,mx),b=rnd(1,mx),n=rnd(3,mx+4),m=rnd(1,n-1),p=rnd(2,mx+2);
+ return [ty('Real-life maths',`Mrs Campbell-Morgan has ${a} pencils. She gets ${b} more. How many pencils does she have now? Type the number.`,a+b,`Count on ${b} from ${a}.`,`${a} and ${b} more makes ${a+b} pencils.`,ems('✏️',Math.min(a,12),'pencils')),
+ ty('Real-life maths',`There are ${n} children at the tuck shop. ${m} children leave. How many are left? Type the number.`,n-m,`Take away ${m} from ${n}.`,`${n} take away ${m} leaves ${n-m} children.`,'<div class="em">🏪🧒🧒🧒</div>'),
+ mc('Cardinal numbers','Look at the line of children. Which number tells how many children there are?',nopts(p,p-3,p+3),''+p,'Count each child one time.',`There are ${p} children. Five, six, seven... the cardinal number tells how many.`,ems('🧒',p,'children')),
+ ty('Whole numbers',`A box has 0 crayons. Leroy puts in ${b} crayons. How many crayons are in the box now? Type the number.`,b,`Zero plus ${b} is ${b}.`,`Zero plus ${b} equals ${b} crayons.`,'<div class="em">📦🖍️</div>'),
+ mc('Classifying numbers',`Ana counts ${p} people in a line. What type of number tells how many people?`,CT.slice(),CT[2],'Which type of number tells how many?','A cardinal number tells how many.','<div class="em">🧍🧍🧍🧍</div>')]};
+/* WORLD 2 */
+const gMatch=L=>{const mx={s:5,o:12,c:20}[L],ks={s:4,o:5,c:6}[L];
+ const m=()=>({k:'match',tag:'Ordinal numbers',t:'Match each ordinal name to its symbol. Tap a name, then tap its symbol.',n:shuf([...Array(mx)].map((_,i)=>i+1)).slice(0,ks).sort((a,b)=>a-b),hint:'Most ordinal numbers end in th. Special ones: first is 1st, second is 2nd, third is 3rd.',why:'Great matching! Ordinal names and symbols tell the position.'});
+ const q=()=>{const n=L==='c'?rnd(11,20):rnd(1,mx);return mc('Ordinal numbers',`Which symbol matches the ordinal word ${ORD[n-1]}?`,[sym(n),sym(Math.max(1,n-1)),sym(Math.min(20,n+1)),n+'th'].filter((v,i,a)=>a.indexOf(v)===i),sym(n),'Most ordinal numbers end in th. Special ones: 1st, 2nd and 3rd.',`${ORD[n-1]} is written ${sym(n)}.`)};
+ return [m(),m(),q(),q(),q()]};
+const raceVis=(P,flag,lab)=>line(P,flag,lab);
+const gRace=L=>{const N={s:4,o:6,c:8}[L],P=shuf(RUN).slice(0,N),vis=raceVis(P,'🏁','A race. The finish line is on the left. Runners are shown in the order they finished.'),T='Ordinal numbers';
+ const names=a=>shuf([a,...shuf(P.map(x=>x.n).filter(x=>x!==a)).slice(0,3)]);
+ const w=()=>mc(T,'Look at the race. The finish line is on the left. Who won the race?',names(P[0].n),P[0].n,'The winner is closest to the finish line.',`${P[0].n} is closest to the finish line, so ${P[0].n} came first.`,vis);
+ const pos=()=>{const k=rnd(1,N-1);return mc(T,`What position did ${P[k].n} finish in?`,ordOpts(k,N),ORD[k],'Count from the finish line: first, second, third.',`${P[k].n} finished ${ORD[k]}.`,vis)};
+ const who=()=>{const k=rnd(1,N-1);return mc(T,`Who finished in ${ORD[k]} place?`,names(P[k].n),P[k].n,'Count from the finish line.',`${P[k].n} was ${ORD[k]}, written ${sym(k+1)}.`,vis)};
+ const last=()=>mc(T,'Who finished last?',names(P[N-1].n),P[N-1].n,'Last means the very end of the line.',`${P[N-1].n} is at the end, in ${ORD[N-1]} place.`,vis);
+ const cnt=()=>{const k=rnd(2,N-1);return mc('Cardinal or ordinal',`How many runners finished before ${P[k].n}? Careful: this is a cardinal number question.`,nopts(k,k-2,k+2),''+k,'Count the runners between the finish line and this runner.',`${k} runners finished before ${P[k].n}. That number tells how many, so it is cardinal.`,vis)};
+ return L==='c'?[w(),pos(),who(),cnt(),last()]:[w(),pos(),who(),pos(),last()]};
+const gQueue=L=>{const mx={s:10,o:20,c:20}[L],k=L==='s'?4:6,T='Ordinal numbers';
+ const o=()=>({k:'order',tag:T,t:'Arrange the queue! Tap the ordinal numbers in order, starting with the smallest.',n:shuf([...Array(mx)].map((_,i)=>i+1)).slice(0,k),hint:'Find the smallest one first. Think: first, second, third, fourth.',why:'You put the queue in the correct order from first to last.'});
+ const Q=shuf(RUN).slice(0,5),vis=line(Q,'🛒','A queue at the tuck shop. The shop is on the left. The person at the front is first.');
+ const f=()=>{const j=rnd(0,4);return mc(T,`Look at the tuck shop queue. Who is ${ORD[j]} in the line?`,shuf([Q[j].n,...shuf(Q.map(x=>x.n).filter(x=>x!==Q[j].n)).slice(0,3)]),Q[j].n,'Start at the tuck shop and count: first, second, third.',`${Q[j].n} is ${ORD[j]} in the line.`,vis)};
+ const o2=mc(T,`Look at the queue. What position is ${Q[3].n} in?`,ordOpts(3,5),'fourth','Count from the shop.',`${Q[3].n} is fourth, written 4th.`,vis);
+ const q3=mc('Cardinal or ordinal',`How many children are in front of ${Q[2].n}? This number tells how many.`,['1','2','3','4'],'2','Count the children between the shop and this child.',`Two children are in front of ${Q[2].n}. Two is a cardinal number.`,vis);
+ return [o(),o(),f(),o2,q3]};
+const gOrdType=L=>{const mx={s:5,o:20,c:20}[L],r=()=>L==='c'?rnd(11,20):rnd(1,mx),T='Ordinal numbers',out=[];
+ for(let i=0;i<2;i++){const n=r();out.push(ty(T,'Look at the ordinal symbol. Write its ordinal name in words.',ORD[n-1],`It begins with the letter ${ORD[n-1][0]}.`,`${sym(n)} is read as ${ORD[n-1]}.`,`<div class="em">${sym(n)}</div>`,false))}
+ for(let i=0;i<2;i++){const n=r();out.push(ty(T,'Look at the ordinal word. Write it as an ordinal symbol, with numbers and letters.',sym(n),'Write the number, then the ending: st, nd, rd or th.',`${ORD[n-1]} is written ${sym(n)}.`,`<div class="em">${ORD[n-1]}</div>`,false))}
+ const n=rnd(1,Math.min(mx,19));out.push(ty(T,`What ordinal number comes after ${ORD[n-1]}? Type the word.`,ORD[n],'Count on one position.',`After ${ORD[n-1]} comes ${ORD[n]}.`,null,false));return shuf(out)};
+const gCardOrd=L=>{const CI=['5 pencils','3 apples','7 blocks','2 books','9 oranges','4 coins'],OI=['2nd place','4th chair','first in line','9th day','third runner','tenth page'],k=L==='s'?2:L==='o'?3:4;
+ const s=()=>({k:'sort',tag:'Cardinal or ordinal',t:'Cardinal numbers tell how many. Ordinal numbers tell the position. Tap a card, then tap the right box.',items:shuf(shuf(CI).slice(0,k).map(l=>({l,b:0,w:'This number tells how many, so it is cardinal.'})).concat(shuf(OI).slice(0,k).map(l=>({l,b:1,w:'This number tells the position, so it is ordinal.'})))),bk:['Cardinal (how many)','Ordinal (position)'],hint:'Ask: does it tell how many, or which position?',why:'Cardinal numbers tell how many. Ordinal numbers tell the position.'});
+ const P=[['There are 3 cats in the garden.',0],['Mia is 3rd in the line.',1],['Kemar has 6 marbles.',0],['Our class is on the 2nd floor.',1],['Jada won first place.',1],['I can see 8 birds.',0]],O=['Cardinal (tells how many)','Ordinal (tells position)'];
+ return [s(),s()].concat(shuf(P).slice(0,3).map(p=>mc('Cardinal or ordinal',`Listen to this sentence. ${p[0]} Is the number cardinal or ordinal?`,O.slice(),O[p[1]],'Ask: does it tell how many, or which position?',p[1]?'It tells the position, so it is ordinal.':'It tells how many, so it is cardinal.',`<div class="em">${E(p[0])}</div>`)))};
+const FIX2=[['Maya wrote the word twoth for 2nd.','The word is second','The word is twoth','We say second for 2nd.'],
+ ['Josh finished the race in 3rd place and says he came second.','Josh came third','Josh came first','3rd means third place.'],
+ ['Zara says 11th is read as oneth.','11th is read as eleventh','11th is read as tenth','Eleventh is the ordinal name for 11th.'],
+ ['Ben spelled 12th as twelveth.','The word is spelled twelfth','The word is spelled twelfeth','Twelfth is the correct spelling.'],
+ ['Lia wrote 3th for third.','It should be 3rd','It should be 3st','Third is written 3rd.'],
+ ['A teacher says the child at the front of the line is second.','The child at the front is first','The child at the front is third','The person at the front is first, written 1st.'],
+ ['The teacher wrote this order: 1st, 2nd, 4th, 3rd, 5th.','The 4th and 3rd are swapped','The 1st and 2nd are swapped','The correct order is 1st, 2nd, 3rd, 4th, 5th.']];
+const gFixOrd=L=>shuf(FIX2).slice(0,5).map(x=>mc('Ordinal numbers',`Detective Dot found a mistake. ${x[0]} What is the mistake?`,[x[1],x[2],'There is no mistake'],x[1],'Check the ordinal name and symbol in the chart.',x[3]));
+const gLifeOrd=L=>{const T='Real-life maths',A={
+ 1:()=>mc(T,'In the morning we do devotion first, the pledge second, and then lessons. Which comes second?',['Devotion','The pledge','Lessons'],'The pledge','Count in order: first, second, third.','The pledge comes second.','<div class="em">🙏 🇯🇲 📘</div>'),
+ 2:()=>mc('Cardinal or ordinal','Kemar is fourth in the line at the tuck shop. Is the number four a cardinal or an ordinal number here?',['Cardinal','Ordinal'],'Ordinal','Does it tell how many, or the position?','Fourth tells Kemar\'s position, so it is ordinal.'),
+ 3:()=>ty(T,'Kemar is fourth in the line. How many children are in front of him? Type the number.',3,'If he is fourth, count the children before him.','Three children are in front of Kemar.',null),
+ 4:()=>mc(T,'Monday is the first day of our school week. Which day is the fifth day?',['Wednesday','Thursday','Friday','Saturday'],'Friday','Count: Monday, Tuesday, Wednesday, Thursday...','Friday is the fifth day.'),
+ 5:()=>mc(T,'January is the first month of the year. Which is the third month?',['February','March','April','May'],'March','Count the months in order.','March is the third month.'),
+ 6:()=>mc(T,'Our line is Ana, Leroy, Carys, then Sian. Who is third?',['Ana','Leroy','Carys','Sian'],'Carys','Count from the front of the line.','Carys is third.','<div class="em">🐱 🐶 🐇 🦊</div>'),
+ 7:()=>ty(T,'What ordinal number comes after tenth? Type the word.','eleventh','Count on one more position.','After tenth comes eleventh.',null,false)};
+ return shuf({s:[1,2,4,5,6],o:[1,2,4,5,6,7],c:[2,3,4,6,7,5]}[L]).slice(0,5).map(i=>A[i]())};
+/* ---------- activities ---------- */
+const ACT={1:[
+ {id:'det',n:'Number Detective',i:'🕵️',d:'Find numbers hidden in everyday objects',gen:gDetective},
+ {id:'cnt',n:'Count the Objects',i:'🍎',d:'Count and pick the cardinal number',gen:gCount},
+ {id:'srt',n:'Sort the Numbers',i:'🗂️',d:'Counting, whole and cardinal cards',gen:gSortNum},
+ {id:'zer',n:'Zero Challenge',i:'0️⃣',d:'Is zero a whole or counting number?',gen:gZero},
+ {id:'whi',n:'Which Number Am I?',i:'❓',d:'Solve the clues',gen:gWhich},
+ {id:'mis',n:'Fill the Missing Number',i:'🧩',d:'Complete sequences and neighbours',gen:gMissing},
+ {id:'how',n:'How Many?',i:'🧮',d:'Type the quantity you count',gen:gHow},
+ {id:'fix',n:'Fix the Mistake',i:'🛠️',d:'Spot and correct errors',gen:gFix},
+ {id:'lif',n:'Real-Life Maths Mission',i:'🏪',d:'Pencils, tuck shop and more',gen:gLife}],
+2:[
+ {id:'mat',n:'Ordinal Matching',i:'🔗',d:'Match names to symbols',gen:gMatch},
+ {id:'rac',n:'Ordinal Number Race',i:'🏁',d:'Who is first, second, third?',gen:gRace},
+ {id:'que',n:'Arrange the Queue',i:'🛒',d:'Put positions in order',gen:gQueue},
+ {id:'oty',n:'Say and Write Ordinals',i:'✍️',d:'Names and symbols, first to twentieth',gen:gOrdType},
+ {id:'cor',n:'Cardinal or Ordinal?',i:'⚖️',d:'How many, or which position?',gen:gCardOrd},
+ {id:'fxo',n:'Fix the Mistake',i:'🛠️',d:'Correct ordinal errors',gen:gFixOrd},
+ {id:'lio',n:'Real-Life Maths Mission',i:'🏫',d:'Routines, queues and calendars',gen:gLifeOrd}]};
+const ALL=[...ACT[1],...ACT[2]];
+const LV={s:['🌱','Support'],o:['⭐','On-level'],c:['🚀','Challenge']};
+const LEARN={1:[
+ ['What is a number?','A number is a symbol, figure or word which is used to represent a quantity. Any number can be written using the ten digits 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Numbers are everywhere. Look at a clock, a microwave, a phone and a remote.','<div class="em">⏰ 📱 📅 🎲</div>'+chips([0,1,2,3,4,5,6,7,8,9])],
+ ['Counting numbers','Mrs Campbell-Morgan has 5 pencils on her desk. We can count the pencils: one, two, three, four, five. These are counting numbers. Counting numbers start at 1, because you cannot count zero.',ems('✏️',5,'pencils')+chips([1,2,3,4,5])],
+ ['Whole numbers','If there were no pencils, we could say there are 0 pencils. So 0, 1, 2, 3, 4, 5 and so on are whole numbers. Whole numbers are counting numbers with zero added. Every counting number is a whole number. Every whole number is a counting number, except zero.',chips([0,1,2,3,4,5],0)],
+ ['Cardinal numbers','A cardinal number says how many objects are in a set. Here are five coins. The number five is a cardinal number because it tells us how many coins there are. A cardinal number tells the quantity.',ems('🪙',5,'coins')+'<div class="cardn" style="width:70px">5</div>'],
+ ['Think, pair, share','Think about this. If there are 0 mangoes in a basket, is 0 a whole number? Yes! Zero is a whole number, but it is not a counting number. You are ready to be a Number Detective!',ems('🥭',0,'mangoes')]],
+2:[
+ ['Ordinal numbers','An ordinal number tells us the position of something in a list. We say first, second, third, fourth and fifth. In a race, the girl in second place is 2nd. The two puppies behind her are third and fourth.',line([{n:'1st',e:'🐱'},{n:'2nd',e:'👧'},{n:'3rd',e:'🐶'},{n:'4th',e:'🐶'}],'🏁','A race with a cat first, a girl second and two puppies third and fourth')],
+ ['Cardinal or ordinal?','Cardinal numbers tell how many. Ordinal numbers tell the position. In five coins, five tells how many. In fifth place, fifth tells the position. Be a detective and ask yourself: how many, or which position?',`<div class="g"><div class="fb">${ems('🪙',5,'coins')}<b>Five coins</b><br>Cardinal: how many</div><div class="fb h"><div class="em">🥇🥈🥉🏅🏅</div><b>Fifth place</b><br>Ordinal: position</div></div>`],
+ ['First to twentieth','Here are the ordinal numbers from first to twentieth. Tap a card to hear its name. First, second and third are special. Most other ordinal numbers end in th. Watch the spelling of fifth, eighth, ninth and twelfth.','CHART'],
+ ['Where do we use them?','We use ordinal numbers every day. At school we do devotion first, the pledge second, and then lessons. In the queue at the tuck shop, the child at the front is first. In a race, the winner is first. You are ready for the adventures!','<div class="em">🙏 1st &nbsp; 🇯🇲 2nd &nbsp; 📘 3rd</div><div class="em">🛒 🏁</div>']]};
+/* ---------- screens ---------- */
+let G=null,page=0;
+function setScreen(h){RA.stop();$('#screen').innerHTML=h;scrollTo(0,0);const f=$('#screen h1,#screen h2');if(f){f.tabIndex=-1;f.focus({preventScroll:true})}}
+const done=w=>ACT[w].filter(a=>S.stars[a.id]>0).length;
+const badges=()=>[['🔎 Number Detective',done(1)===ACT[1].length],['🏅 Ordinal Explorer',done(2)===ACT[2].length],['0️⃣ Zero Hero',S.stars.zer===3],['🏁 Race Champion',S.stars.rac===3],['🏆 Master Detective',(S.stars.final||0)>=2]];
+function home(){const ok=done(1)>=3&&done(2)>=3;
+ setScreen(`<section class="c hero"><div class="pop">${MASC}</div><div><h1>Number Detectives!</h1>${ra('Hello! I am Detective Dot. Let us learn about counting numbers, whole numbers, cardinal numbers and ordinal numbers. First learn each world, then play the games. Press the green Read aloud button at the bottom to hear any page.')}</div></section>
+ <section class="c"><h2>Choose your level</h2><div role="group" aria-label="Level">${Object.entries(LV).map(([k,v])=>`<button class="b ${k===S.lvl?'gr':'bl'}" aria-pressed="${k===S.lvl}" data-a="lvl" data-v="${k}">${v[0]} ${v[1]}</button>`).join('')}</div>
+ <p><small>🌱 Support: smaller numbers and extra help. ⭐ On-level: Grade 3 questions. 🚀 Challenge: harder clues and reasoning.</small></p></section>
+ <div class="g"><section class="c w1"><h2>🔎 World 1</h2><h3>Number Detectives</h3><p>Counting, whole and cardinal numbers</p><div class="stars">${done(1)}/${ACT[1].length} games</div><button class="b" data-a="world" data-v="1">Enter World 1</button></section>
+ <section class="c w2"><h2>🏁 World 2</h2><h3>Ordinal Number Adventures</h3><p>First to twentieth</p><div class="stars">${done(2)}/${ACT[2].length} games</div><button class="b alt" data-a="world" data-v="2">Enter World 2</button></section>
+ <section class="c wf"><h2>🏆 Final Mission</h2><h3>Mixed challenge</h3><p>${ok?'Ten questions from both worlds!':'Earn a star in 3 games in each world to unlock.'}</p><div class="stars">${stars(S.stars.final||0)}</div><button class="b gr" data-a="play" data-v="final" ${ok?'':'disabled'}>${ok?'Start Final Mission':'🔒 Locked'}</button></section></div>
+ <section class="c"><h2>My badges</h2>${badges().map(b=>`<span class="badge ${b[1]?'':'off'}">${b[0]}</span>`).join('')}<p><button class="b sm pk" data-a="reset">Clear my progress</button></p></section>`)}
+function world(w){const L=!!S.learned[w];
+ setScreen(`<div class="top"><button class="b sm" data-a="home">🏠 Home</button></div><section class="c w${w}"><h2>${w==1?'🔎 World 1: Number Detectives':'🏁 World 2: Ordinal Number Adventures'}</h2>${ra(L?'Choose a game to play. Earn stars by answering correctly the first time.':'First, learn the big ideas. Then the games will open!')}<button class="b ${L?'bl':'gr'}" data-a="learn" data-v="${w}">📖 ${L?'Learn again':'Start learning'}</button></section>
+ <div class="g">${ACT[w].map(a=>`<button class="c b ${L?'':'lock'}" style="color:inherit;background:#fff;text-align:left;box-shadow:0 8px 0 rgba(38,38,79,.12)" data-a="play" data-v="${a.id}" ${L?'':'disabled'}><div style="font-size:2rem">${a.i}</div><b>${a.n}</b><br><small>${a.d}</small><div class="stars">${L?stars(S.stars[a.id]||0):'🔒'}</div></button>`).join('')}</div>`)}
+function learn(w,p){page=p;const P=LEARN[w][p],last=p===LEARN[w].length-1;
+ let vis=P[2];if(vis==='CHART')vis=`<div class="chips">`+ORD.map((o,i)=>`<button class="b card sm" data-a="say" data-v="${o}" style="--h:${i*18}"><b style="font-size:1.2rem">${sym(i+1)}</b><br>${o}</button>`).join('')+'</div>';
+ setScreen(`<div class="top"><button class="b sm" data-a="world" data-v="${w}">⬅ Back</button><div class="pb"><i style="width:${(p+1)/LEARN[w].length*100}%"></i></div><span>Page ${p+1} of ${LEARN[w].length}</span></div>
+ <section class="c w${w}"><h2>${P[0]}</h2>${ra(P[1])}${vis}<div>${p?`<button class="b bl" data-a="lp" data-v="${w}:${p-1}">⬅ Before</button>`:''}${last?`<button class="b gr" data-a="ready" data-v="${w}">I am ready to play! 🎮</button>`:`<button class="b" data-a="lp" data-v="${w}:${p+1}">Next ➜</button>`}</div></section>`)}
+function start(id){const a=id==='final'?{id:'final',n:'Final Mission',i:'🏆'}:ALL.find(x=>x.id===id);
+ const qs=id==='final'?shuf(ALL.map(x=>pick(x.gen(S.lvl)))).slice(0,10):a.gen(S.lvl);
+ G={a,qs,i:0,ok:0,tot:0,pts:0,tags:{}};showQ()}
+function showQ(){const q=G.qs[G.i];q.mist=0;q.done=false;q.pos=0;q.sel=null;
+ setScreen(`<div class="top"><button class="b sm" data-a="home">🏠 Home</button><div class="pb"><i style="width:${G.i/G.qs.length*100}%"></i></div><span>Question ${G.i+1} of ${G.qs.length} · ⭐ ${G.pts}</span></div>
+ <section class="c"><h2>${G.a.i} ${G.a.n}</h2>${ra(q.t,'p','qq')}<button class="b sm bl" data-a="hear" data-v=".qq">🔊 Hear the question</button>${q.vis||''}<div id="ui">${ui(q)}</div><div id="hint"></div><div id="fb" aria-live="polite"></div>
+ <div><button class="b alt" data-a="hint">💡 Hint</button><button class="b gr" id="nx" data-a="next" hidden>Next ➜</button></div></section>`)}
+function ui(q){
+ if(q.k==='mc')return `<div class="opts">${q.o.map(o=>`<button class="b opt" data-a="mc" data-v="${E(o)}">${E(o)}</button>`).join('')}</div>`;
+ if(q.k==='type')return `<div class="tin"><input id="ans" type="text" inputmode="${q.num?'numeric':'text'}" autocomplete="off" autocapitalize="off" aria-label="Your answer" maxlength="20"> <button class="b" data-a="chk">Check ✔</button></div>`;
+ if(q.k==='sort')return `<div id="pool">${q.items.map((x,i)=>`<button class="b card${x.num?' num':''}" data-a="pick" data-v="${i}">${E(x.l)}</button>`).join('')}</div><div class="bk">${q.bk.map((b,i)=>`<div class="bucket"><button class="b gr" data-a="drop" data-v="${i}">${E(b)}</button><div class="in" id="bk${i}"></div></div>`).join('')}</div>`;
+ if(q.k==='order')return `<div class="slots" id="slots" aria-label="Your order"></div><div id="pool">${q.n.map(n=>`<button class="b card num" data-a="ord" data-v="${n}">${sym(n)}</button>`).join('')}</div>`;
+ if(q.k==='match'){const r=shuf(q.n);q.left=q.n.length;return `<div class="g"><div>${q.n.map(n=>`<button class="b bl" data-a="ml" data-v="${n}">${ORD[n-1]}</button>`).join('')}</div><div>${r.map(n=>`<button class="b card num" data-a="mr" data-v="${n}">${sym(n)}</button>`).join('')}</div></div>`}}
+const fb=(t,c='')=>{$('#fb').innerHTML=`<div class="fb ${c}">${ra(t)}<button class="b sm bl" data-a="hear" data-v="#fb">🔊 Hear this</button></div>`};
+function fin(q,ok,msg){q.done=true;G.tot++;if(ok){G.ok++;G.pts+=10}
+ for(const o of [G.tags,S.tag]){const t=o[q.tag]=o[q.tag]||{c:0,t:0};t.t++;if(ok)t.c++}save();
+ fb(msg,ok?'':'bad');$$('#ui button').forEach(b=>{if(!b.classList.contains('ok'))b.disabled=true});
+ const n=$('#nx');n.hidden=false;n.textContent=G.i>=G.qs.length-1?'See results 🏆':'Next ➜';n.focus()}
+const Q=()=>G&&G.qs[G.i];
+const A={
+ home,lvl:v=>{S.lvl=v;save();home()},world:v=>world(+v),learn:v=>learn(+v,0),lp:v=>{const[w,p]=v.split(':');learn(+w,+p)},
+ ready:v=>{S.learned[v]=1;save();world(+v)},play:start,say:v=>RA.quick(v),
+ reset:()=>{if(confirm('Clear all saved stars and badges on this device?')){S={lvl:S.lvl,learned:{},stars:{},tag:{}};save();home()}},
+ hear:v=>RA.play($$(v+' .s')),
+ hint:()=>{const q=Q();$('#hint').innerHTML=`<div class="fb h">${ra('Hint: '+q.hint)}<button class="b sm bl" data-a="hear" data-v="#hint">🔊 Hear this</button></div>`},
+ next:()=>{G.i++;G.i>=G.qs.length?results():showQ()},
+ mc:(v,b)=>{const q=Q();if(q.done)return;if(v===q.a){b.classList.add('ok');fin(q,q.mist===0,(q.mist===0?pick(PRAISE)+' ':'You found it. ')+q.why)}
+  else{q.mist++;b.classList.add('no','shake');b.disabled=true;
+   if(q.mist>=2){$$('#ui .opt').forEach(x=>{if(x.dataset.v===q.a)x.classList.add('ok')});fin(q,false,'The answer is '+q.a+'. '+q.why)}else fb('Not quite. '+q.hint+' Try again!','bad')}},
+ chk:()=>{const q=Q();if(q.done)return;const inp=$('#ans'),v=inp.value.toLowerCase().replace(/\s+/g,'');if(!v){fb('Type your answer first.','bad');inp.focus();return}
+  if(q.a.includes(v)){fin(q,q.mist===0,(q.mist===0?pick(PRAISE)+' ':'You found it. ')+q.why)}
+  else{q.mist++;inp.classList.add('shake');if(q.mist>=2)fin(q,false,'The answer is '+q.a[0]+'. '+q.why);else{fb('Not quite. '+q.hint+' Try again!','bad');inp.select()}}},
+ pick:v=>{const q=Q();if(q.done)return;q.sel=+v;$$('#pool .card').forEach(b=>b.classList.toggle('sel',b.dataset.v===v))},
+ drop:(v,bt)=>{const q=Q();if(q.done)return;if(q.sel==null){fb('First tap a card, then tap the box where it belongs.','h');return}
+  const it=q.items[q.sel],card=$(`#pool .card[data-v="${q.sel}"]`);
+  if(it.b===+v){card.classList.remove('sel');card.dataset.a='';card.disabled=true;card.classList.add('ok');$('#bk'+v).appendChild(card);q.sel=null;q.left=(q.left==null?q.items.length:q.left)-1;fb(pick(PRAISE)+' '+it.w);
+   if(q.left===0)fin(q,q.mist<=(q.items.length>=5?1:0),'All sorted! '+q.why)}
+  else{q.mist++;card.classList.add('shake');fb('Not there. '+it.w+' Try another box.','bad')}},
+ ord:(v,b)=>{const q=Q();if(q.done)return;const s=[...q.n].sort((a,b)=>a-b);RA.quick(ORD[+v-1]);
+  if(+v===s[q.pos]){q.pos++;b.disabled=true;b.classList.add('ok');const c=b.cloneNode(true);c.disabled=true;$('#slots').appendChild(c);b.hidden=true;fb(pick(PRAISE));if(q.pos===s.length)fin(q,q.mist<=1,q.why)}
+  else{q.mist++;b.classList.add('shake');fb('Not yet. Look for the smallest ordinal number that is left.','bad')}},
+ ml:(v,b)=>{const q=Q();if(q.done)return;q.sel=+v;RA.quick(ORD[+v-1]);$$('[data-a="ml"]').forEach(x=>x.classList.toggle('sel',x===b))},
+ mr:(v,b)=>{const q=Q();if(q.done)return;if(q.sel==null){fb('First tap an ordinal name on the left.','h');return}
+  if(+v===q.sel){b.classList.add('ok');b.disabled=true;const l=$(`[data-a="ml"][data-v="${v}"]`);l.classList.remove('sel');l.classList.add('ok');l.disabled=true;q.sel=null;q.left--;fb(pick(PRAISE));if(q.left===0)fin(q,q.mist<=1,q.why)}
+  else{q.mist++;b.classList.add('shake');fb('Not a match. '+q.hint,'bad')}}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a]&&!b.disabled)A[b.dataset.a](b.dataset.v,b)});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='ans')A.chk()});
+function results(){const pct=G.ok/G.tot,st=pct>=.9?3:pct>=.7?2:pct>=.5?1:0,before=badges().filter(b=>b[1]).length;
+ S.stars[G.a.id]=Math.max(S.stars[G.a.id]||0,st);save();const after=badges().filter(b=>b[1]).length;
+ const T=Object.entries(G.tags),good=T.filter(([k,v])=>v.c/v.t>=.8),more=T.filter(([k,v])=>v.c/v.t<.8);
+ const msg=st===3?'Amazing work, Detective! You got almost everything right the first time.':st>=1?'Good work! Practise the topics below and try again for more stars.':'Good try! Learning takes practice. Read the lesson again, use the hints, and play once more.';
+ setScreen(`<section class="c hero"><div class="pop">${MASC}</div><div><h1>${G.a.i} ${G.a.n} complete!</h1><div class="stars" style="font-size:2.2rem" aria-label="${st} stars">${stars(st)}</div>${ra(`You got ${G.ok} out of ${G.tot} right the first time and scored ${G.pts} points. ${msg}`)}${after>before?'<p class="badge pop">🎉 You earned a new badge!</p>':''}</div></section>
+ <section class="c"><h2>My learning summary</h2><p><b>Strengths:</b> ${good.length?good.map(([k,v])=>`<span class="badge">✅ ${k} (${v.c}/${v.t})</span>`).join(''):'Keep practising!'}</p><p><b>Practise more:</b> ${more.length?more.map(([k,v])=>`<span class="badge off" style="filter:none;opacity:1;background:#fff0f0;border-color:#e8465a">📌 ${k} (${v.c}/${v.t})</span>`).join(''):'Nothing! Super!'}</p>
+ <button class="b gr" data-a="play" data-v="${G.a.id}">🔁 Play again</button>${G.a.id==='final'?'':`<button class="b" data-a="world" data-v="${ACT[1].includes(G.a)?1:2}">🎮 More games</button>`}<button class="b alt" data-a="home">🏠 Home</button></section>`)}
+$('#foot').innerHTML=(canStore?'💾 Your stars are saved in this browser on this device only. They will not move to another device or browser.':'⚠️ Saving is turned off in this browser, so progress will be lost when you close the page.')+' No personal information is collected. Read Aloud uses your device’s voices and works best in Chrome, Edge or Safari; word-by-word highlighting depends on the voice.';
+home();
+</script></body></html>
